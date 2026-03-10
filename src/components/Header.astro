@@ -1,0 +1,55 @@
+---
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/70 backdrop-blur-xl border-b border-[#222222]/50 px-6 py-4 flex items-center justify-between transition-all">
+  <a href="#" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+    <img src="/LogoDclickV2.png" alt="Dclick IA" class="h-[96px] md:h-[112px]" />
+  </a>
+
+  <div class="hidden md:flex items-center gap-8 text-[#A0AEC0] text-base font-normal">
+    <a href="#offres" class="hover:text-white transition-colors">Offres</a>
+    <a href="#cas-usage" class="hover:text-white transition-colors">Cas d'usage</a>
+    <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+  </div>
+
+  <a href="#contact" class="hidden md:inline-flex items-center justify-center bg-gradient-to-r from-[#2E7BD4] to-[#1E5A9D] hover:from-[#3B82F6] hover:to-[#2666B0] shadow-lg shadow-[#2E7BD4]/20 hover:shadow-[#2E7BD4]/40 hover:-translate-y-0.5 text-white text-base font-medium px-5 py-2.5 rounded-lg transition-all duration-300">
+    Audit flash gratuit
+  </a>
+
+  <button id="menu-btn" aria-label="Menu" class="md:hidden text-[#A0AEC0] hover:text-white transition-colors">
+    <i id="icon-menu" data-lucide="menu" class="w-6 h-6"></i>
+    <i id="icon-close" data-lucide="x" class="w-6 h-6 hidden"></i>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="md:hidden hidden fixed top-[128px] left-0 right-0 z-40 bg-[#0A0A0A]/95 backdrop-blur-xl border-b border-[#222222] flex-col">
+  <a href="#offres" class="mobile-link px-6 py-4 text-base text-[#A0AEC0] hover:text-white border-b border-[#181818] transition-colors">Offres</a>
+  <a href="#cas-usage" class="mobile-link px-6 py-4 text-base text-[#A0AEC0] hover:text-white border-b border-[#181818] transition-colors">Cas d'usage</a>
+  <a href="#contact" class="mobile-link px-6 py-4 text-base text-[#A0AEC0] hover:text-white border-b border-[#181818] transition-colors">Contact</a>
+  <a href="#contact" class="mobile-link mx-6 my-4 bg-gradient-to-r from-[#2E7BD4] to-[#1E5A9D] text-white text-base font-medium px-5 py-2.5 rounded-lg text-center">Audit flash gratuit</a>
+</div>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconMenu = document.getElementById('icon-menu');
+  const iconClose = document.getElementById('icon-close');
+
+  btn?.addEventListener('click', () => {
+    const open = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', open);
+    menu?.classList.toggle('flex', !open);
+    iconMenu?.classList.toggle('hidden', !open);
+    iconClose?.classList.toggle('hidden', open);
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      menu?.classList.remove('flex');
+      iconMenu?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+    });
+  });
+</script>
