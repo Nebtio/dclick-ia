@@ -1,401 +1,491 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+// Dclick IA – Landing Page restructurée (3 offres)
+// Astro 4 + CSS custom
 ---
 
-<Layout>
-  <Header />
-  <Hero />
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dclick IA | Le déclic IA pour votre métier</title>
+  <meta name="description" content="Dclick IA – Consultant IA & Automatisation pour artisans, commerçants et PME du Giennois. Ateliers pratiques, audit IA, IoT et données terrain." />
+  <link rel="icon" type="image/png" href="/LogoDclickV2.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- DE LA CONFUSION À L'ACTION -->
-  <section class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-[#222222]/50 relative">
-    <div class="text-center mb-16 max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">De la confusion à <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#2E7BD4]">l'action</span></h2>
-      <p class="text-lg text-[#A0AEC0]">Nous transformons vos freins actuels en leviers de productivité immédiats.</p>
+  <style>
+    :root {
+      --clr-bg: #0c0e13;
+      --clr-surface: #14171f;
+      --clr-surface-alt: #1a1e28;
+      --clr-accent: #f59e0b;
+      --clr-accent-hover: #fbbf24;
+      --clr-accent-glow: rgba(245, 158, 11, 0.25);
+      --clr-text: #e8e6e3;
+      --clr-text-muted: #9ca3af;
+      --clr-border: #2a2e38;
+      --clr-success: #34d399;
+      --clr-info: #60a5fa;
+      --clr-iot: #a78bfa;
+      --font-heading: 'Sora', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-heading);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* — Utility — */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+    .text-accent { color: var(--clr-accent); }
+    .text-muted { color: var(--clr-text-muted); }
+    .font-mono { font-family: var(--font-mono); }
+
+    /* — Animations — */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px var(--clr-accent-glow); }
+      50% { box-shadow: 0 0 40px var(--clr-accent-glow), 0 0 60px rgba(245,158,11,0.1); }
+    }
+    .animate-fade-up { opacity: 0; animation: fadeUp 0.7s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* — Nav — */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(12, 14, 19, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+    nav .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1140px; margin: 0 auto; padding: 0.75rem 1.5rem;
+    }
+    nav img { height: 40px; }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .nav-links a {
+      color: var(--clr-text-muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: var(--clr-accent); }
+
+    /* — Buttons — */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--clr-accent); color: var(--clr-bg);
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: var(--clr-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--clr-accent-glow);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--clr-accent);
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; border: 1px solid var(--clr-accent);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover { background: rgba(245,158,11,0.1); transform: translateY(-2px); }
+    .btn-sm { padding: 0.5rem 1.25rem; font-size: 0.85rem; }
+
+    /* — Hero — */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 0 4rem;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(245,158,11,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(96,165,250,0.04) 0%, transparent 50%),
+        var(--clr-bg);
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .hero .subtitle {
+      font-size: 1.05rem; color: var(--clr-text-muted);
+      margin-bottom: 0.75rem; letter-spacing: 0.5px;
+    }
+    .hero .tagline {
+      font-size: 1.1rem; line-height: 1.7; max-width: 600px;
+      margin-bottom: 1.5rem; border-left: 3px solid var(--clr-accent);
+      padding-left: 1rem; color: var(--clr-text);
+    }
+    .hero .trust-signals {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 2rem;
+    }
+    .hero .trust-signals span::before { content: '◆ '; color: var(--clr-accent); }
+    .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* — Section titles — */
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 0.75rem; }
+    .section-subtitle { color: var(--clr-text-muted); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; }
+    section { padding: 5rem 0; }
+
+    /* — Pain points — */
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .pain-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 2rem; transition: all 0.3s ease;
+    }
+    .pain-card:hover { border-color: var(--clr-accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .pain-card .pain-quote { font-style: italic; color: var(--clr-text-muted); margin-bottom: 1rem; font-size: 0.95rem; }
+    .pain-card .pain-answer { color: var(--clr-accent); font-weight: 600; font-size: 0.95rem; }
+
+    /* — Profils — */
+    .profils-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .profil-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;
+    }
+    .profil-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--clr-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .profil-card:hover::before { transform: scaleX(1); }
+    .profil-card:hover { border-color: var(--clr-accent); transform: translateY(-4px); }
+    .profil-card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .profil-card .profil-pain { font-style: italic; color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    .profil-card .profil-reco { font-family: var(--font-mono); font-size: 0.85rem; color: var(--clr-accent); line-height: 1.8; }
+
+    /* — Parcours — */
+    .parcours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .parcours-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 16px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: all 0.4s ease;
+    }
+    .parcours-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .parcours-card .step-number {
+      font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700;
+      color: rgba(245,158,11,0.15); position: absolute; top: 1rem; right: 1.5rem; line-height: 1;
+    }
+    .parcours-card .step-badge {
+      display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; padding: 0.3rem 0.75rem; border-radius: 4px; margin-bottom: 1rem;
+    }
+    .parcours-card.step-maitriser .step-badge { background: rgba(245,158,11,0.15); color: var(--clr-accent); }
+    .parcours-card.step-maitriser:hover { border-color: var(--clr-accent); }
+    .parcours-card.step-optimiser .step-badge { background: rgba(52,211,153,0.15); color: var(--clr-success); }
+    .parcours-card.step-optimiser:hover { border-color: var(--clr-success); }
+    .parcours-card.step-piloter .step-badge { background: rgba(167,139,250,0.15); color: var(--clr-iot); }
+    .parcours-card.step-piloter:hover { border-color: var(--clr-iot); }
+    .parcours-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .parcours-card .step-desc { color: var(--clr-text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .parcours-card ul { list-style: none; padding: 0; }
+    .parcours-card ul li { font-size: 0.9rem; color: var(--clr-text); padding: 0.35rem 0 0.35rem 1.5rem; position: relative; }
+    .parcours-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--clr-accent); font-weight: 600; }
+    .parcours-card.step-optimiser ul li::before { color: var(--clr-success); }
+    .parcours-card.step-piloter ul li::before { color: var(--clr-iot); }
+    .parcours-card .step-format { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--clr-border); font-size: 0.85rem; color: var(--clr-text-muted); }
+    .parcours-card .step-result { margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
+    .parcours-card.step-maitriser .step-result { color: var(--clr-accent); }
+    .parcours-card.step-optimiser .step-result { color: var(--clr-success); }
+    .parcours-card.step-piloter .step-result { color: var(--clr-iot); }
+
+    /* — IoT sub-grid — */
+    .iot-sub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+    .iot-sub-card { background: var(--clr-surface-alt); border-radius: 8px; padding: 1rem; text-align: center; }
+    .iot-sub-card h4 { font-size: 0.9rem; color: var(--clr-iot); margin-bottom: 0.5rem; }
+    .iot-sub-card p { font-size: 0.8rem; color: var(--clr-text-muted); line-height: 1.5; }
+
+    /* — Cas d'usage — */
+    .cas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .cas-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 12px; padding: 2rem; transition: all 0.3s ease; }
+    .cas-card:hover { border-color: var(--clr-accent); transform: translateY(-3px); }
+    .cas-card h4 { color: var(--clr-accent); font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+    .cas-card p { font-size: 0.95rem; color: var(--clr-text-muted); font-style: italic; line-height: 1.6; }
+
+    /* — CTA final — */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 60%), var(--clr-bg);
+    }
+    .cta-section .cta-box {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 16px; padding: 3rem 2rem; max-width: 700px; margin: 0 auto;
+      animation: glow 4s ease-in-out infinite;
+    }
+    .cta-section h2 { margin-bottom: 1rem; }
+    .cta-section p { color: var(--clr-text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
+    .cta-meta { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; font-size: 0.85rem; color: var(--clr-text-muted); }
+
+    /* — Footer — */
+    footer { border-top: 1px solid var(--clr-border); padding: 2.5rem 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { display: flex; align-items: center; gap: 0.75rem; }
+    .footer-brand img { height: 32px; }
+    .footer-brand span { font-size: 0.85rem; color: var(--clr-text-muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--clr-text-muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--clr-accent); }
+    .footer-copy { width: 100%; text-align: center; font-size: 0.8rem; color: var(--clr-text-muted); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--clr-border); }
+
+    /* — Mobile nav — */
+    .nav-toggle { display: none; background: none; border: none; color: var(--clr-text); font-size: 1.5rem; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      nav .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--clr-surface); flex-direction: column; padding: 1.5rem;
+        border-bottom: 1px solid var(--clr-border);
+      }
+      nav .nav-links.open { display: flex; }
+      .iot-sub-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ——— NAV ——— -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#"><img src="/LogoDclickV2.png" alt="Dclick IA" /></a>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+      <div class="nav-links">
+        <a href="#offres">Offres</a>
+        <a href="#cas-usage">Cas d'usage</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn-primary btn-sm">Audit flash gratuit</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-
-      <!-- Card 1 -->
-      <div class="relative group flex flex-col h-full hover:-translate-y-2 transition-transform duration-500">
-        <div class="absolute -inset-0.5 bg-gradient-to-b from-transparent via-[#2E7BD4]/20 to-[#2E7BD4]/50 rounded-[1.5rem] blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
-        <div class="relative h-full flex flex-col rounded-2xl bg-[#0A0A0A] border border-[#222222] shadow-2xl overflow-hidden">
-          <div class="p-8 pb-12 bg-[#141414]/40 flex flex-col items-center text-center">
-            <div class="w-12 h-12 rounded-full bg-[#222222]/50 flex items-center justify-center mb-5 border border-[#333]">
-              <i data-lucide="help-circle" class="w-6 h-6 text-[#666]"></i>
-            </div>
-            <p class="text-lg text-[#888] font-medium leading-relaxed">"Je ne sais pas par où commencer"</p>
-          </div>
-          <div class="relative h-0 flex justify-center z-10">
-            <div class="absolute -top-6 w-12 h-12 rounded-full bg-[#0A0A0A] border border-[#222222] group-hover:border-[#2E7BD4] group-hover:bg-[#2E7BD4]/10 flex items-center justify-center shadow-[0_0_0_8px_#0A0A0A] transition-all duration-500 z-20">
-              <i data-lucide="zap" class="w-5 h-5 text-[#444] group-hover:text-[#60A5FA] group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] transition-all duration-500"></i>
-            </div>
-          </div>
-          <div class="p-8 pt-12 bg-gradient-to-b from-[#141414] to-[#141414] group-hover:to-[#2E7BD4]/10 border-t border-dashed border-[#333] group-hover:border-solid group-hover:border-[#2E7BD4]/40 flex-1 flex flex-col items-center justify-center text-center relative transition-all duration-500">
-            <div class="absolute bottom-[-20%] inset-x-0 h-32 bg-[#2E7BD4]/30 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-            <p class="text-xl font-semibold text-white group-hover:text-[#60A5FA] transition-colors duration-300 drop-shadow-sm relative z-10">
-              Clarté immédiate sur VOTRE usage
-            </p>
-          </div>
-        </div>
+  <!-- ——— HERO ——— -->
+  <section class="hero">
+    <div class="container">
+      <p class="subtitle animate-fade-up">Artisan · Commerçant · PME · Services</p>
+      <h1 class="animate-fade-up delay-1">Le déclic IA<br />pour <span class="text-accent">votre métier</span></h1>
+      <p class="tagline animate-fade-up delay-2">
+        Vous comprenez enfin ce que l'IA peut faire concrètement pour <strong>VOTRE</strong> métier — et vous repartez avec un premier cas d'usage opérationnel.
+      </p>
+      <div class="trust-signals animate-fade-up delay-3">
+        <span>Proximité locale</span>
+        <span>Sans jargon</span>
+        <span>Premier déclic dès la 1ère intervention</span>
       </div>
-
-      <!-- Card 2 -->
-      <div class="relative group flex flex-col h-full hover:-translate-y-2 transition-transform duration-500">
-        <div class="absolute -inset-0.5 bg-gradient-to-b from-transparent via-[#2E7BD4]/20 to-[#2E7BD4]/50 rounded-[1.5rem] blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
-        <div class="relative h-full flex flex-col rounded-2xl bg-[#0A0A0A] border border-[#222222] shadow-2xl overflow-hidden">
-          <div class="p-8 pb-12 bg-[#141414]/40 flex flex-col items-center text-center">
-            <div class="w-12 h-12 rounded-full bg-[#222222]/50 flex items-center justify-center mb-5 border border-[#333]">
-              <i data-lucide="users" class="w-6 h-6 text-[#666]"></i>
-            </div>
-            <p class="text-lg text-[#888] font-medium leading-relaxed">"Mon équipe résiste<br />à l'IA"</p>
-          </div>
-          <div class="relative h-0 flex justify-center z-10">
-            <div class="absolute -top-6 w-12 h-12 rounded-full bg-[#0A0A0A] border border-[#222222] group-hover:border-[#2E7BD4] group-hover:bg-[#2E7BD4]/10 flex items-center justify-center shadow-[0_0_0_8px_#0A0A0A] transition-all duration-500 z-20">
-              <i data-lucide="zap" class="w-5 h-5 text-[#444] group-hover:text-[#60A5FA] group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] transition-all duration-500"></i>
-            </div>
-          </div>
-          <div class="p-8 pt-12 bg-gradient-to-b from-[#141414] to-[#141414] group-hover:to-[#2E7BD4]/10 border-t border-dashed border-[#333] group-hover:border-solid group-hover:border-[#2E7BD4]/40 flex-1 flex flex-col items-center justify-center text-center relative transition-all duration-500">
-            <div class="absolute bottom-[-20%] inset-x-0 h-32 bg-[#2E7BD4]/30 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-            <p class="text-xl font-semibold text-white group-hover:text-[#60A5FA] transition-colors duration-300 drop-shadow-sm relative z-10">
-              Adoption métier<br />sans friction
-            </p>
-          </div>
-        </div>
+      <div class="cta-group animate-fade-up delay-4">
+        <a href="#contact" class="btn-primary">Audit flash gratuit — 30 min</a>
+        <a href="#offres" class="btn-secondary">Découvrir nos offres</a>
       </div>
-
-      <!-- Card 3 -->
-      <div class="relative group flex flex-col h-full hover:-translate-y-2 transition-transform duration-500">
-        <div class="absolute -inset-0.5 bg-gradient-to-b from-transparent via-[#2E7BD4]/20 to-[#2E7BD4]/50 rounded-[1.5rem] blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
-        <div class="relative h-full flex flex-col rounded-2xl bg-[#0A0A0A] border border-[#222222] shadow-2xl overflow-hidden">
-          <div class="p-8 pb-12 bg-[#141414]/40 flex flex-col items-center text-center">
-            <div class="w-12 h-12 rounded-full bg-[#222222]/50 flex items-center justify-center mb-5 border border-[#333]">
-              <i data-lucide="eye-off" class="w-6 h-6 text-[#666]"></i>
-            </div>
-            <p class="text-lg text-[#888] font-medium leading-relaxed">"Je ne vois pas ce que ça m'apporte"</p>
-          </div>
-          <div class="relative h-0 flex justify-center z-10">
-            <div class="absolute -top-6 w-12 h-12 rounded-full bg-[#0A0A0A] border border-[#222222] group-hover:border-[#2E7BD4] group-hover:bg-[#2E7BD4]/10 flex items-center justify-center shadow-[0_0_0_8px_#0A0A0A] transition-all duration-500 z-20">
-              <i data-lucide="zap" class="w-5 h-5 text-[#444] group-hover:text-[#60A5FA] group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] transition-all duration-500"></i>
-            </div>
-          </div>
-          <div class="p-8 pt-12 bg-gradient-to-b from-[#141414] to-[#141414] group-hover:to-[#2E7BD4]/10 border-t border-dashed border-[#333] group-hover:border-solid group-hover:border-[#2E7BD4]/40 flex-1 flex flex-col items-center justify-center text-center relative transition-all duration-500">
-            <div class="absolute bottom-[-20%] inset-x-0 h-32 bg-[#2E7BD4]/30 blur-[50px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-            <p class="text-xl font-semibold text-white group-hover:text-[#60A5FA] transition-colors duration-300 drop-shadow-sm relative z-10">
-              1 cas concret<br />opérationnel validé
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 2 PROFILS -->
-  <section id="offres" class="py-24 px-6 w-full max-w-5xl mx-auto border-t border-[#222222]/50">
-    <div class="mb-16 text-center md:text-left">
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">3 profils, 1 seul <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#2E7BD4]">déclic</span></h2>
-      <p class="text-lg text-[#A0AEC0]">Trouvez l'accompagnement adapté à votre structure.</p>
-    </div>
-
-    <div class="flex flex-col gap-6">
-
-      <!-- Petite structure -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#7B3A10]/40 hover:shadow-2xl hover:shadow-[#7B3A10]/10 transition-all duration-300 hover:-translate-y-1 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-        <div class="flex items-center gap-4 md:w-1/3">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7B3A10]/20 to-[#7B3A10]/5 border border-[#7B3A10]/30 flex items-center justify-center text-[#E67E22] shrink-0 shadow-[0_0_15px_rgba(123,58,16,0.2)]">
-            <i data-lucide="store" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-medium tracking-tight text-white">Petite structure</h3>
-        </div>
-        <div class="md:w-1/3">
-          <p class="text-base text-[#A0AEC0] italic">"Je n'ai pas le temps, je ne sais pas par où commencer"</p>
-        </div>
-        <div class="md:w-1/3 flex flex-col gap-3 w-full">
-          <div class="bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#7B3A10]/50 hover:bg-[#141414] px-5 py-4 rounded-xl text-base text-white font-medium flex items-center justify-between group transition-all cursor-pointer">
-            Offre 1 — Ateliers pratiques
-            <i data-lucide="arrow-right" class="w-4 h-4 text-[#444] group-hover:text-[#E67E22] group-hover:translate-x-1 transition-all"></i>
-          </div>
-          <div class="bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#7B3A10]/50 hover:bg-[#141414] px-5 py-4 rounded-xl text-base text-white font-medium flex items-center justify-between group transition-all cursor-pointer">
-            Offre 2 — Audit flash
-            <i data-lucide="arrow-right" class="w-4 h-4 text-[#444] group-hover:text-[#E67E22] group-hover:translate-x-1 transition-all"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- PME & Services -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-2xl hover:shadow-[#2E7BD4]/10 transition-all duration-300 hover:-translate-y-1 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-        <div class="flex items-center gap-4 md:w-1/3">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] shrink-0 shadow-[0_0_15px_rgba(46,123,212,0.2)]">
-            <i data-lucide="building-2" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-medium tracking-tight text-white">PME &amp; Services</h3>
-        </div>
-        <div class="md:w-1/3">
-          <p class="text-base text-[#A0AEC0] italic">"Mon équipe résiste, je ne sais pas quoi automatiser"</p>
-        </div>
-        <div class="md:w-1/3 flex flex-col gap-3 w-full">
-          <div class="bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#2E7BD4]/50 hover:bg-[#141414] px-5 py-4 rounded-xl text-base text-white font-medium flex items-center justify-between group transition-all cursor-pointer">
-            Offre 2 + Offre 1 (Combo)
-            <i data-lucide="arrow-right" class="w-4 h-4 text-[#444] group-hover:text-[#60A5FA] group-hover:translate-x-1 transition-all"></i>
-          </div>
-          <div class="bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#2E7BD4]/50 hover:bg-[#141414] px-5 py-4 rounded-xl text-base text-white font-medium flex items-center justify-between group transition-all cursor-pointer">
-            puis Offre 3 ou 4
-            <i data-lucide="arrow-right" class="w-4 h-4 text-[#444] group-hover:text-[#60A5FA] group-hover:translate-x-1 transition-all"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- Industrie & Production -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#A0AEC0]/40 hover:shadow-2xl hover:shadow-[#A0AEC0]/10 transition-all duration-300 hover:-translate-y-1 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-        <div class="flex items-center gap-4 md:w-1/3">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A0AEC0]/20 to-[#A0AEC0]/5 border border-[#A0AEC0]/30 flex items-center justify-center text-[#A0AEC0] shrink-0 shadow-[0_0_15px_rgba(160,174,192,0.2)]">
-            <i data-lucide="factory" class="w-6 h-6"></i>
-          </div>
-          <h3 class="text-xl font-medium tracking-tight text-white">Industrie &amp; Production</h3>
-        </div>
-        <div class="md:w-1/3">
-          <p class="text-base text-[#A0AEC0] italic">"Mes données terrain ne servent à rien"</p>
-        </div>
-        <div class="md:w-1/3 flex flex-col gap-3 w-full">
-          <div class="bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#A0AEC0]/50 hover:bg-[#141414] px-5 py-4 rounded-xl text-base text-white font-medium flex items-center justify-between group transition-all cursor-pointer">
-            Offre 2 + Offre 4 (IoT)
-            <i data-lucide="arrow-right" class="w-4 h-4 text-[#444] group-hover:text-[#A0AEC0] group-hover:translate-x-1 transition-all"></i>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- LE PARCOURS EN 4 ÉTAPES -->
-  <section class="py-24 px-6 w-full max-w-6xl mx-auto border-t border-[#222222]/50">
-    <div class="mb-16 max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">Le parcours en <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#2E7BD4]">4 étapes</span></h2>
-    </div>
-
-    <div class="flex flex-col max-w-4xl mx-auto w-full">
-
-      <!-- Étape 01 -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/30 hover:shadow-2xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 p-8 md:p-10 rounded-2xl relative flex flex-col overflow-hidden group">
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#2E7BD4]/10 rounded-full blur-3xl group-hover:bg-[#2E7BD4]/20 transition-all duration-500 z-0"></div>
-        <div class="absolute top-8 right-8 text-6xl font-bold text-[#222222]/40 select-none z-10 group-hover:text-[#2E7BD4]/20 transition-colors">01</div>
-        <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase mb-4 z-10">Maîtriser</div>
-        <h3 class="text-2xl font-medium tracking-tight text-white mb-4 z-10">Ateliers IA &amp; Usage maîtrisé</h3>
-        <p class="text-lg text-[#A0AEC0] mb-8 z-10 leading-relaxed">Rendre vos équipes autonomes sur les outils IA du quotidien.</p>
-        <ul class="space-y-4 mb-10 z-10 flex-1">
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Prise en main : ChatGPT, Claude, Mistral, Perplexity, NotebookLM</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Bonnes pratiques de prompting et usage professionnel</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Module Shadow AI : identifier et encadrer les usages non contrôlés</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Rédaction collaborative d'une mini-charte IA interne</span>
-          </li>
-        </ul>
-        <div class="mt-auto z-10 flex flex-col gap-5 pt-6 border-t border-[#222222]">
-          <div class="flex items-center gap-3 text-sm text-[#A0AEC0]">
-            <i data-lucide="clock" class="w-4 h-4 text-[#60A5FA]"></i> ½ journée ou 1 journée <span class="text-[#444]">|</span> Tous collaborateurs
-          </div>
-          <div class="bg-[#0A0A0A]/50 border border-[#2E7BD4]/20 px-4 py-3 rounded-lg text-sm text-[#60A5FA] font-medium text-center md:text-left shadow-inner">
-            Adoption sereine · Usage cadré · Zéro résistance
-          </div>
-        </div>
-      </div>
-
-      <div class="flex justify-center w-full py-1">
-        <div class="w-[2px] h-12 bg-gradient-to-b from-[#2E7BD4] via-[#2E7BD4]/30 to-[#222222] opacity-80 rounded-full"></div>
-      </div>
-
-      <!-- Étape 02 -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/30 hover:shadow-2xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 p-8 md:p-10 rounded-2xl relative flex flex-col overflow-hidden group">
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#2E7BD4]/10 rounded-full blur-3xl group-hover:bg-[#2E7BD4]/20 transition-all duration-500 z-0"></div>
-        <div class="absolute top-8 right-8 text-6xl font-bold text-[#222222]/40 select-none z-10 group-hover:text-[#2E7BD4]/20 transition-colors">02</div>
-        <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase mb-4 z-10">Optimiser</div>
-        <h3 class="text-2xl font-medium tracking-tight text-white mb-4 z-10">Étude d'optimisation assistée par IA</h3>
-        <p class="text-lg text-[#A0AEC0] mb-8 z-10 leading-relaxed">Identifier vos gains rapides et construire votre feuille de route IA.</p>
-        <ul class="space-y-4 mb-10 z-10 flex-1">
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Diagnostic flash (pré-audit) ou audit complet des processus métier</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Cartographie des tâches répétitives et automatisables</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Recommandations priorisées avec estimation des gains (temps, coûts)</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Suivi post-audit optionnel</span>
-          </li>
-        </ul>
-        <div class="mt-auto z-10 flex flex-col gap-5 pt-6 border-t border-[#222222]">
-          <div class="flex items-center gap-3 text-sm text-[#A0AEC0]">
-            <i data-lucide="file-text" class="w-4 h-4 text-[#60A5FA]"></i> Rapport + Roadmap priorisée + Estimation ROI
-          </div>
-          <div class="bg-[#0A0A0A]/50 border border-[#2E7BD4]/20 px-4 py-3 rounded-lg text-sm text-[#60A5FA] font-medium text-center md:text-left shadow-inner">
-            Actions prioritaires · Gains estimés · Démarrage immédiat
-          </div>
-        </div>
-      </div>
-
-      <div class="flex justify-center w-full py-1">
-        <div class="w-[2px] h-12 bg-gradient-to-b from-[#2E7BD4] via-[#2E7BD4]/30 to-[#222222] opacity-80 rounded-full"></div>
-      </div>
-
-      <!-- Étape 03 -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/30 hover:shadow-2xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 p-8 md:p-10 rounded-2xl relative flex flex-col overflow-hidden group">
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#2E7BD4]/10 rounded-full blur-3xl group-hover:bg-[#2E7BD4]/20 transition-all duration-500 z-0"></div>
-        <div class="absolute top-8 right-8 text-6xl font-bold text-[#222222]/40 select-none z-10 group-hover:text-[#2E7BD4]/20 transition-colors">03</div>
-        <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase mb-4 z-10">Créer</div>
-        <h3 class="text-2xl font-medium tracking-tight text-white mb-4 z-10">Accompagnement IA Créative</h3>
-        <p class="text-lg text-[#A0AEC0] mb-8 z-10 leading-relaxed">Mettre en place une chaîne de production de contenu assistée par IA.</p>
-        <ul class="space-y-4 mb-10 z-10 flex-1">
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Audit des besoins créatifs et configuration des outils</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Outils : Flux, HeyGen, DALL-E, Google AI Studio, ElevenLabs</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Méthode : texte, image, vidéo, audio, avatars IA</span>
-          </li>
-          <li class="flex items-start gap-3 text-base text-[#A0AEC0]">
-            <i data-lucide="check" class="w-5 h-5 text-[#2E7BD4] shrink-0 mt-0.5"></i>
-            <span>Accompagnement à la production autonome et reproductible</span>
-          </li>
-        </ul>
-        <div class="mt-auto z-10 flex flex-col gap-5 pt-6 border-t border-[#222222]">
-          <div class="flex items-center gap-3 text-sm text-[#A0AEC0]">
-            <i data-lucide="users" class="w-4 h-4 text-[#60A5FA]"></i> Atelier + accompagnement sur site
-          </div>
-          <div class="bg-[#0A0A0A]/50 border border-[#2E7BD4]/20 px-4 py-3 rounded-lg text-sm text-[#60A5FA] font-medium text-center md:text-left shadow-inner">
-            Chaîne de production autonome opérationnelle
-          </div>
-        </div>
-      </div>
-
-      <div class="flex justify-center w-full py-1">
-        <div class="w-[2px] h-12 bg-gradient-to-b from-[#2E7BD4] via-[#2E7BD4]/30 to-[#222222] opacity-80 rounded-full"></div>
-      </div>
-
-      <!-- Étape 04 -->
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/30 hover:shadow-2xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 p-8 md:p-10 rounded-2xl relative flex flex-col overflow-hidden group">
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#2E7BD4]/10 rounded-full blur-3xl group-hover:bg-[#2E7BD4]/20 transition-all duration-500 z-0"></div>
-        <div class="absolute top-8 right-8 text-6xl font-bold text-[#222222]/40 select-none z-10 group-hover:text-[#2E7BD4]/20 transition-colors">04</div>
-        <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase mb-4 z-10">Piloter</div>
-        <h3 class="text-2xl font-medium tracking-tight text-white mb-4 z-10">Exploitation des données terrain</h3>
-        <p class="text-lg text-[#A0AEC0] mb-10 z-10">Captez · Comprenez · Anticipez</p>
-
-        <div class="flex flex-col md:flex-row items-stretch justify-between gap-4 mb-10 z-10">
-          <div class="flex-1 bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#2E7BD4]/50 p-6 rounded-xl text-center flex flex-col items-center gap-3 transition-colors">
-            <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase">Captez</div>
-            <p class="text-sm text-[#A0AEC0]">Diagnostic data<br />Étude de faisabilité<br />Capteurs IoT &amp; domotique</p>
-          </div>
-          <div class="hidden md:flex flex-col justify-center items-center">
-            <i data-lucide="arrow-right" class="w-6 h-6 text-[#444] group-hover:text-[#2E7BD4]/60 transition-colors"></i>
-          </div>
-          <div class="md:hidden flex justify-center items-center py-2">
-            <i data-lucide="arrow-down" class="w-6 h-6 text-[#444]"></i>
-          </div>
-          <div class="flex-1 bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#2E7BD4]/50 p-6 rounded-xl text-center flex flex-col items-center gap-3 transition-colors">
-            <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase">Comprenez</div>
-            <p class="text-sm text-[#A0AEC0]">Dashboard temps réel<br />Données visualisées<br />Alertes intelligentes</p>
-          </div>
-          <div class="hidden md:flex flex-col justify-center items-center">
-            <i data-lucide="arrow-right" class="w-6 h-6 text-[#444] group-hover:text-[#2E7BD4]/60 transition-colors"></i>
-          </div>
-          <div class="md:hidden flex justify-center items-center py-2">
-            <i data-lucide="arrow-down" class="w-6 h-6 text-[#444]"></i>
-          </div>
-          <div class="flex-1 bg-[#0A0A0A]/80 border border-[#222222] hover:border-[#2E7BD4]/50 p-6 rounded-xl text-center flex flex-col items-center gap-3 transition-colors">
-            <div class="text-[#60A5FA] text-xs font-semibold tracking-widest uppercase">Anticipez</div>
-            <p class="text-sm text-[#A0AEC0]">Plan exploitation IA<br />Modèles prédictifs<br />Décisions data-driven</p>
-          </div>
-        </div>
-
-        <div class="mt-auto z-10 flex flex-col gap-5 pt-6 border-t border-[#222222]">
-          <div class="flex items-center gap-3 text-sm text-[#A0AEC0]">
-            <i data-lucide="target" class="w-4 h-4 text-[#60A5FA]"></i> Industrie, production, logistique, immobilier
-          </div>
-          <div class="bg-[#0A0A0A]/50 border border-[#2E7BD4]/20 px-4 py-3 rounded-lg text-sm text-[#60A5FA] font-medium text-center md:text-left shadow-inner">
-            Décisions pilotées par la donnée terrain
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- CAS D'USAGE -->
-  <section id="cas-usage" class="py-24 px-6 w-full border-t border-[#222222]/50 overflow-hidden">
-    <div class="max-w-6xl mx-auto mb-12 text-center md:text-left">
-      <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">5 cas d'usage concrets — artisans &amp; services</h2>
-      <p class="text-lg text-[#A0AEC0]">Découvrez comment l'IA s'applique à votre quotidien.</p>
-    </div>
-
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 hover:-translate-y-1 p-8 rounded-2xl flex flex-col gap-6 group">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform">
-          <i data-lucide="hammer" class="w-6 h-6"></i>
+  <!-- ——— PAIN POINTS ——— -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">De la confusion <span class="text-accent">à l'action</span></h2>
+      <p class="section-subtitle">Nous transformons vos freins actuels en leviers de productivité immédiats.</p>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <p class="pain-quote">"Je ne sais pas par où commencer"</p>
+          <p class="pain-answer">→ Clarté immédiate sur VOTRE usage</p>
         </div>
-        <h3 class="text-xl font-medium text-white tracking-tight">Artisan / TPE</h3>
-        <p class="text-base text-[#A0AEC0] leading-relaxed">"Génération automatique de devis par messagerie vocale : l'artisan dicte, l'IA rédige et envoie le devis au client."</p>
-      </div>
-
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 hover:-translate-y-1 p-8 rounded-2xl flex flex-col gap-6 group">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform">
-          <i data-lucide="users" class="w-6 h-6"></i>
+        <div class="pain-card">
+          <p class="pain-quote">"Mon équipe résiste à l'IA"</p>
+          <p class="pain-answer">→ Adoption métier sans friction</p>
         </div>
-        <h3 class="text-xl font-medium text-white tracking-tight">Agence d'intérim</h3>
-        <p class="text-base text-[#A0AEC0] leading-relaxed">"Agent IA qui pré-qualifie les candidatures, trie les CV et prépare les fiches de poste en quelques secondes."</p>
-      </div>
-
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 hover:-translate-y-1 p-8 rounded-2xl flex flex-col gap-6 group">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform">
-          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        <div class="pain-card">
+          <p class="pain-quote">"Je ne vois pas ce que ça m'apporte"</p>
+          <p class="pain-answer">→ 1 cas concret opérationnel validé</p>
         </div>
-        <h3 class="text-xl font-medium text-white tracking-tight">Assurance / Service client</h3>
-        <p class="text-base text-[#A0AEC0] leading-relaxed">"Chatbot 24h/24 qui répond aux questions courantes, collecte les pièces et oriente vers le bon interlocuteur."</p>
       </div>
-
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 hover:-translate-y-1 p-8 rounded-2xl flex flex-col gap-6 group">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform">
-          <i data-lucide="cog" class="w-6 h-6"></i>
-        </div>
-        <h3 class="text-xl font-medium text-white tracking-tight">Production / Qualité</h3>
-        <p class="text-base text-[#A0AEC0] leading-relaxed">"Workflow automatisé d'alertes et de documentation des non-conformités, en temps réel depuis le terrain."</p>
-      </div>
-
-      <div class="bg-[#141414]/60 backdrop-blur-xl border border-[#222222] hover:border-[#2E7BD4]/40 hover:shadow-xl hover:shadow-[#2E7BD4]/5 transition-all duration-300 hover:-translate-y-1 p-8 rounded-2xl flex flex-col gap-6 group md:col-span-2 lg:col-span-1">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2E7BD4]/20 to-[#2E7BD4]/5 border border-[#2E7BD4]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform">
-          <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
-        </div>
-        <h3 class="text-xl font-medium text-white tracking-tight">Direction PME</h3>
-        <p class="text-base text-[#A0AEC0] leading-relaxed">"Synthèse hebdomadaire automatique des indicateurs clés, préparée par un agent IA avant chaque réunion."</p>
-      </div>
-
     </div>
   </section>
 
-  <Contact />
-  <Footer />
-</Layout>
+  <!-- ——— 3 PROFILS ——— -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">3 profils, <span class="text-accent">1 seul déclic</span></h2>
+      <p class="section-subtitle">Trouvez l'accompagnement adapté à votre structure.</p>
+      <div class="profils-grid">
+        <div class="profil-card">
+          <h3>Petite structure</h3>
+          <p class="profil-pain">"Je n'ai pas le temps, je ne sais pas par où commencer"</p>
+          <p class="profil-reco">
+            → Offre 1 — Ateliers IA<br />
+            → Offre 2 — Audit flash
+          </p>
+        </div>
+        <div class="profil-card">
+          <h3>PME &amp; Services</h3>
+          <p class="profil-pain">"Mon équipe résiste, je ne sais pas quoi automatiser"</p>
+          <p class="profil-reco">
+            → Offre 2 + Offre 1 (Combo)<br />
+            → puis Offre 3 — IoT si besoin
+          </p>
+        </div>
+        <div class="profil-card">
+          <h3>Industrie &amp; Production</h3>
+          <p class="profil-pain">"Mes données terrain ne servent à rien"</p>
+          <p class="profil-reco">
+            → Offre 2 + Offre 3 (IoT)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— PARCOURS 3 ÉTAPES ——— -->
+  <section id="offres">
+    <div class="container">
+      <h2 class="section-title">Le parcours en <span class="text-accent">3 étapes</span></h2>
+      <p class="section-subtitle">De la prise en main à l'exploitation de vos données.</p>
+
+      <div class="parcours-grid">
+
+        <!-- ÉTAPE 01 — MAÎTRISER -->
+        <div class="parcours-card step-maitriser">
+          <span class="step-number">01</span>
+          <span class="step-badge">Maîtriser</span>
+          <h3>Ateliers IA — Usage &amp; Création</h3>
+          <p class="step-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
+          <ul>
+            <li>Prise en main : ChatGPT, Claude, Mistral, Perplexity, NotebookLM</li>
+            <li>Bonnes pratiques de prompting et usage professionnel</li>
+            <li>Module Shadow AI : identifier et encadrer les usages non contrôlés</li>
+            <li>Rédaction collaborative d'une mini-charte IA interne</li>
+            <li>Outils créatifs : Flux, HeyGen, DALL-E, Google AI Studio, ElevenLabs</li>
+            <li>Méthode : texte, image, vidéo, audio, avatars IA</li>
+            <li>Accompagnement à la production autonome et reproductible</li>
+          </ul>
+          <p class="step-format">½ journée ou 1 journée | Tous collaborateurs | Sur site ou à distance</p>
+          <p class="step-result">Adoption sereine · Usage cadré · Chaîne créative opérationnelle</p>
+        </div>
+
+        <!-- ÉTAPE 02 — OPTIMISER -->
+        <div class="parcours-card step-optimiser">
+          <span class="step-number">02</span>
+          <span class="step-badge">Optimiser</span>
+          <h3>Étude d'optimisation assistée par IA</h3>
+          <p class="step-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
+          <ul>
+            <li>Diagnostic flash (pré-audit) ou audit complet des processus métier</li>
+            <li>Cartographie des tâches répétitives et automatisables</li>
+            <li>Recommandations priorisées avec estimation des gains (temps, coûts)</li>
+            <li>Suivi post-audit optionnel</li>
+          </ul>
+          <p class="step-format">Rapport + Roadmap priorisée + Estimation ROI</p>
+          <p class="step-result">Actions prioritaires · Gains estimés · Démarrage immédiat</p>
+        </div>
+
+        <!-- ÉTAPE 03 — PILOTER (IoT) -->
+        <div class="parcours-card step-piloter">
+          <span class="step-number">03</span>
+          <span class="step-badge">Piloter</span>
+          <h3>Exploitation des données terrain</h3>
+          <p class="step-desc">Captez · Comprenez · Anticipez</p>
+
+          <div class="iot-sub-grid">
+            <div class="iot-sub-card">
+              <h4>Captez</h4>
+              <p>Diagnostic data<br />Étude de faisabilité<br />Capteurs IoT &amp; domotique</p>
+            </div>
+            <div class="iot-sub-card">
+              <h4>Comprenez</h4>
+              <p>Dashboard temps réel<br />Données visualisées<br />Alertes intelligentes</p>
+            </div>
+            <div class="iot-sub-card">
+              <h4>Anticipez</h4>
+              <p>Plan exploitation IA<br />Modèles prédictifs<br />Décisions data-driven</p>
+            </div>
+          </div>
+
+          <p class="step-format">Industrie, production, logistique, immobilier</p>
+          <p class="step-result">Décisions pilotées par la donnée terrain</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— CAS D'USAGE ——— -->
+  <section id="cas-usage">
+    <div class="container">
+      <h2 class="section-title">5 cas d'usage concrets — <span class="text-accent">artisans &amp; services</span></h2>
+      <p class="section-subtitle">Découvrez comment l'IA s'applique à votre quotidien.</p>
+
+      <div class="cas-grid">
+        <div class="cas-card">
+          <h4>Artisan / TPE</h4>
+          <p>Génération automatique de devis par messagerie vocale : l'artisan dicte, l'IA rédige et envoie le devis au client.</p>
+        </div>
+        <div class="cas-card">
+          <h4>Agence d'intérim</h4>
+          <p>Agent IA qui pré-qualifie les candidatures, trie les CV et prépare les fiches de poste en quelques secondes.</p>
+        </div>
+        <div class="cas-card">
+          <h4>Assurance / Service client</h4>
+          <p>Chatbot 24h/24 qui répond aux questions courantes, collecte les pièces et oriente vers le bon interlocuteur.</p>
+        </div>
+        <div class="cas-card">
+          <h4>Production / Qualité</h4>
+          <p>Workflow automatisé d'alertes et de documentation des non-conformités, en temps réel depuis le terrain.</p>
+        </div>
+        <div class="cas-card">
+          <h4>Direction PME</h4>
+          <p>Synthèse hebdomadaire automatique des indicateurs clés, préparée par un agent IA avant chaque réunion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— CTA FINAL ——— -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="section-title">Prêt à faire le <span class="text-accent">premier pas</span> ?</h2>
+        <p>Commençons par un audit flash gratuit de 30 min pour identifier vos 3 premiers gains IA.</p>
+        <a href="mailto:contact@dclickia.fr" class="btn-primary">contact@dclickia.fr</a>
+        <div class="cta-meta">
+          <span>Sans engagement</span>
+          <span>•</span>
+          <span>Résultat concret dès le 1er échange</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--clr-text-muted);">
+          Giennois — Centre-Val de Loire
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— FOOTER ——— -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="/LogoDclickV2.png" alt="Dclick IA" />
+          <span>Le déclic IA pour votre métier</span>
+        </div>
+        <div class="footer-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+        </div>
+      </div>
+      <p class="footer-copy">
+        Données hébergées en France 🇫🇷 &nbsp;·&nbsp; © 2026 Dclick IA — Giennois, Centre-Val de Loire
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
