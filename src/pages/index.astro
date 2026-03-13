@@ -202,10 +202,10 @@
     .parcours-card.step-piloter .step-result { color: var(--clr-iot); }
 
     /* — IoT sub-grid — */
-    .iot-sub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
-    .iot-sub-card { background: var(--clr-surface-alt); border-radius: 8px; padding: 1rem; text-align: center; }
-    .iot-sub-card h4 { font-size: 0.9rem; color: var(--clr-iot); margin-bottom: 0.5rem; }
-    .iot-sub-card p { font-size: 0.8rem; color: var(--clr-text-muted); line-height: 1.5; }
+    .iot-sub-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+    .iot-sub-card { background: var(--clr-surface-alt); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; min-width: 0; overflow: hidden; }
+    .iot-sub-card h4 { font-size: 0.8rem; color: var(--clr-iot); margin-bottom: 0.4rem; font-weight: 700; white-space: nowrap; }
+    .iot-sub-card p { font-size: 0.75rem; color: var(--clr-text-muted); line-height: 1.5; word-break: break-word; }
 
     /* — Cas d'usage — */
     .cas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
