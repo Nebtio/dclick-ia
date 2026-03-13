@@ -142,6 +142,49 @@
     .section-subtitle { color: var(--clr-text-muted); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; }
     section { padding: 5rem 0; }
 
+    /* — Manifeste — */
+    .manifeste {
+      border-top: 1px solid var(--clr-border);
+      border-bottom: 1px solid var(--clr-border);
+      background: linear-gradient(135deg, rgba(46,123,212,0.04) 0%, transparent 60%);
+    }
+    .manifeste-inner {
+      max-width: 760px; margin: 0 auto;
+    }
+    .manifeste-tag {
+      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--clr-accent);
+      margin-bottom: 1.5rem; display: block;
+    }
+    .manifeste h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700;
+      margin-bottom: 1.5rem; line-height: 1.3;
+    }
+    .manifeste .intro {
+      font-size: 1.05rem; color: var(--clr-text-muted);
+      line-height: 1.8; margin-bottom: 1.25rem;
+    }
+    .manifeste .role {
+      font-size: 1rem; color: var(--clr-text-muted);
+      line-height: 1.8; margin-bottom: 1.5rem;
+    }
+    .manifeste ul.manifeste-list {
+      list-style: none; padding: 0; margin-bottom: 2rem;
+    }
+    .manifeste ul.manifeste-list li {
+      font-size: 1rem; color: var(--clr-text);
+      padding: 0.4rem 0 0.4rem 1.5rem; position: relative;
+    }
+    .manifeste ul.manifeste-list li::before {
+      content: '→'; position: absolute; left: 0; color: var(--clr-accent);
+    }
+    .manifeste .signature {
+      font-size: 0.95rem; color: var(--clr-text-muted);
+      font-style: italic; border-left: 3px solid var(--clr-accent);
+      padding-left: 1rem; line-height: 1.8;
+    }
+    .manifeste .signature strong { color: var(--clr-text); font-style: normal; }
+
     /* — Pain points — */
     .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
     .pain-card {
@@ -287,6 +330,30 @@
       <div class="cta-group animate-fade-up delay-4">
         <a href="#contact" class="btn-primary">Audit flash gratuit — 30 min</a>
         <a href="#offres" class="btn-secondary">Découvrir nos offres</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— MANIFESTE ——— -->
+  <section class="manifeste">
+    <div class="container">
+      <div class="manifeste-inner">
+        <span class="manifeste-tag">Une approche simple et concrète de l'IA</span>
+        <h2>L'IA ne doit pas être réservée aux grandes entreprises.</h2>
+        <p class="intro">
+          Je suis convaincu d'une chose : l'intelligence artificielle ne doit pas être réservée aux grandes entreprises ou aux experts techniques.<br /><br />
+          Aujourd'hui, beaucoup de dirigeants, d'artisans et d'équipes entendent parler d'IA… mais ne savent pas vraiment par où commencer ni ce qui est réellement utile pour leur métier.
+        </p>
+        <p class="role">C'est exactement là que j'interviens. Mon rôle n'est pas de vous vendre une technologie compliquée, mais de vous aider à :</p>
+        <ul class="manifeste-list">
+          <li>comprendre ce que l'IA peut réellement apporter à votre activité</li>
+          <li>identifier des usages simples et utiles</li>
+          <li>mettre en place des solutions adaptées à votre quotidien</li>
+        </ul>
+        <p class="signature">
+          <strong>Sans jargon. Sans usine à gaz.</strong><br />
+          Et toujours avec des exemples concrets.
+        </p>
       </div>
     </div>
   </section>
