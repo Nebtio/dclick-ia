@@ -136,6 +136,44 @@
     }
     .hero .trust-signals span::before { content: '◆ '; color: var(--clr-accent); }
     .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    /* — Hero new elements — */
+    .badge-location {
+      display: inline-block; font-size: 0.8rem; font-weight: 600;
+      color: var(--clr-accent); background: rgba(46,123,212,0.1);
+      border: 1px solid rgba(46,123,212,0.3); border-radius: 100px;
+      padding: 0.3rem 0.9rem; margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem; color: var(--clr-text-muted);
+      line-height: 1.7; margin-bottom: 2rem; max-width: 580px;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--clr-text);
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; border: 1px solid var(--clr-border);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover { border-color: var(--clr-accent); color: var(--clr-accent); transform: translateY(-2px); }
+    .hero-metrics {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem; padding: 1.5rem 2rem;
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 12px; width: fit-content;
+    }
+    .metric { display: flex; flex-direction: column; gap: 0.2rem; }
+    .metric-value {
+      font-size: 1.75rem; font-weight: 700; color: var(--clr-accent);
+      font-family: var(--font-mono); line-height: 1;
+    }
+    .metric-label { font-size: 0.8rem; color: var(--clr-text-muted); }
+    .hero-reassurance {
+      font-size: 0.82rem; color: var(--clr-text-muted);
+      border-left: 3px solid var(--clr-border); padding-left: 0.75rem;
+    }
 
     /* — Section titles — */
     .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 0.75rem; }
@@ -295,6 +333,59 @@
       nav .nav-links.open { display: flex; }
       .iot-sub-grid { grid-template-columns: 1fr; }
     }
+
+    /* — Fondateur — */
+    .fondateur { border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
+    .fondateur-inner {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 3rem; align-items: center; max-width: 900px; margin: 0 auto;
+    }
+    .fondateur-photo {
+      width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--clr-accent); box-shadow: 0 0 30px var(--clr-accent-glow);
+    }
+    @media (max-width: 768px) {
+      .fondateur-inner { grid-template-columns: 1fr; text-align: center; }
+      .fondateur-photo { margin: 0 auto; }
+    }
+
+    /* — RGPD badge — */
+    .rgpd-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.75rem; color: var(--clr-success);
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 100px; padding: 0.25rem 0.7rem; margin-top: 1rem;
+    }
+
+    /* — Step price — */
+    .step-price {
+      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700;
+      margin-top: 0.5rem; margin-bottom: 0.25rem;
+    }
+    .step-free {
+      font-size: 0.85rem; color: var(--clr-success); font-weight: 600;
+    }
+    .parcours-card.step-maitriser .step-price { color: var(--clr-accent); }
+    .parcours-card.step-optimiser .step-price { color: var(--clr-success); }
+    .parcours-card.step-piloter .step-price { color: var(--clr-iot); }
+
+    /* — FAQ — */
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
+    .faq-item {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 2rem; transition: all 0.3s ease;
+    }
+    .faq-item:hover { border-color: var(--clr-accent); }
+    .faq-item h3 { font-size: 1rem; color: var(--clr-text); margin-bottom: 0.75rem; font-weight: 600; }
+    .faq-item p { font-size: 0.95rem; color: var(--clr-text-muted); line-height: 1.7; }
+    @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+
+    /* — Cas d'usage PAS — */
+    .pas-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--clr-accent); margin-bottom: 0.2rem; display: block; }
+    .pas-block { margin-bottom: 0.9rem; }
+    .pas-block p { font-size: 0.9rem; color: var(--clr-text-muted); margin: 0; line-height: 1.5; }
+    .pas-block.action p, .pas-block.solution p { color: var(--clr-text); }
+    .pas-block.solution .pas-label { color: var(--clr-success); }
   </style>
 </head>
 
@@ -309,7 +400,7 @@
         <a href="#offres">Offres</a>
         <a href="#cas-usage">Cas d'usage</a>
         <a href="#contact">Contact</a>
-        <a href="#contact" class="btn-primary btn-sm">Audit flash gratuit</a>
+        <a href="#besoin" class="btn-primary btn-sm">Diagnostic gratuit →</a>
       </div>
     </div>
   </nav>
@@ -317,12 +408,38 @@
   <!-- ——— HERO ——— -->
   <section class="hero">
     <div class="container">
-      <p class="subtitle animate-fade-up">Artisan · Commerçant · PME · Services</p>
-      <h1 class="animate-fade-up delay-1">Le déclic IA<br />pour <span class="text-accent">votre métier</span></h1>
-      <div class="cta-group animate-fade-up delay-2">
-        <a href="#contact" class="btn-primary">Audit flash gratuit — 30 min</a>
-        <a href="#offres" class="btn-secondary">Découvrir nos offres</a>
+      <span class="badge-location animate-fade-up">● Giennois &amp; Centre-Val de Loire</span>
+
+      <h1 class="animate-fade-up delay-1">Libérez vos journées des tâches que personne ne veut faire.</h1>
+
+      <p class="hero-subtitle animate-fade-up delay-2">
+        Dclick IA automatise vos devis, relances et saisies administratives.<br />
+        Sans projet complexe, sans formation lourde. Résultats en moins de 30 jours.
+      </p>
+
+      <div class="hero-cta animate-fade-up delay-3">
+        <a href="#rdv" class="btn-primary">Prendre rendez-vous →</a>
+        <a href="#besoin" class="btn-outline">Exprimer mon besoin</a>
       </div>
+
+      <div class="hero-metrics animate-fade-up delay-4">
+        <div class="metric">
+          <span class="metric-value">168%</span>
+          <span class="metric-label">ROI médian constaté</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">&lt; 30 j</span>
+          <span class="metric-label">pour les premiers résultats</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">0</span>
+          <span class="metric-label">formation lourde nécessaire</span>
+        </div>
+      </div>
+
+      <p class="hero-reassurance animate-fade-up delay-4">
+        Hébergement français disponible · Conforme RGPD · Interlocuteur unique, basé à Gien
+      </p>
     </div>
   </section>
 
@@ -346,6 +463,22 @@
           <strong>Sans jargon.<br />Sans usine à gaz.</strong><br />
           Juste des outils utiles et des exemples qui parlent à votre métier.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— FONDATEUR ——— -->
+  <section class="fondateur">
+    <div class="container">
+      <div class="fondateur-inner">
+        <img src="/ben-portrait.jpg" alt="Ben — Fondateur Dclick IA" class="fondateur-photo" />
+        <div class="fondateur-bio">
+          <span class="manifeste-tag">Le fondateur</span>
+          <h2 class="section-title">Bonjour, je suis <span class="text-accent">Ben</span></h2>
+          <p class="intro">Consultant IA & automatisation basé dans le Giennois. J'accompagne artisans, commerçants et PME à utiliser l'IA concrètement dans leur quotidien — sans jargon, sans projet usine à gaz.</p>
+          <p class="intro">Avant de créer Dclick IA, j'ai travaillé en production industrielle et dans les services. Je connais la réalité du terrain : le manque de temps, les outils trop complexes, et les promesses qui ne tiennent pas.</p>
+          <p class="signature">Mon engagement : <strong>un premier résultat concret en moins de 30 jours.</strong></p>
+        </div>
       </div>
     </div>
   </section>
@@ -382,23 +515,24 @@
           <h3>Petite structure</h3>
           <p class="profil-pain">"Je n'ai pas le temps, je ne sais pas par où commencer"</p>
           <p class="profil-reco">
-            → Offre 1 — Ateliers IA<br />
-            → Offre 2 — Audit flash
+            → Ateliers pratiques (360€ HT)<br />
+            → Diagnostic gratuit (flash 30 min)
           </p>
         </div>
         <div class="profil-card">
           <h3>PME &amp; Services</h3>
           <p class="profil-pain">"Mon équipe résiste, je ne sais pas quoi automatiser"</p>
           <p class="profil-reco">
-            → Offre 2 + Offre 1 (Combo)<br />
-            → puis Offre 3 — IoT si besoin
+            → Diagnostic de rentabilité (1 000€ HT)<br />
+            → puis Ateliers pratiques
           </p>
         </div>
         <div class="profil-card">
           <h3>Industrie &amp; Production</h3>
           <p class="profil-pain">"Mes données terrain ne servent à rien"</p>
           <p class="profil-reco">
-            → Offre 2 + Offre 3 (IoT)
+            → Diagnostic de rentabilité<br />
+            → IoT &amp; données terrain
           </p>
         </div>
       </div>
@@ -417,45 +551,51 @@
         <div class="parcours-card step-maitriser">
           <span class="step-number">01</span>
           <span class="step-badge">Maîtriser</span>
-          <h3>Ateliers IA — Usage &amp; Création</h3>
+          <h3>Ateliers pratiques</h3>
           <p class="step-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
           <ul>
-            <li>Prise en main : LLM (GPT, Gemini, Mistral…)</li>
-            <li>Outils créatifs : HeyGen, DALL-E, Google AI Studio, ElevenLabs</li>
-            <li>Bonnes pratiques de prompting et méthode (image, vidéo, audio, avatar)</li>
-            <li>Identifier et encadrer les usages non contrôlés : rédaction mini-charte IA interne</li>
+            <li>Prise en main des assistants IA du quotidien</li>
+            <li>Création de contenu assistée : texte, image, vidéo</li>
+            <li>Bonnes pratiques et méthode de prompting</li>
+            <li>Mini-charte IA interne pour encadrer les usages</li>
           </ul>
+          <p class="step-price">360€ HT</p>
           <p class="step-format">½ journée ou 1 journée | Tous collaborateurs | Sur site ou à distance</p>
-          <p class="step-result">Adoption sereine · Usage cadré · Chaîne créative opérationnelle</p>
+          <p class="step-result">Adoption sereine · Usage cadré · Autonomie rapide</p>
+          <span class="rgpd-badge">✓ Conforme RGPD</span>
         </div>
 
         <!-- ÉTAPE 02 — OPTIMISER -->
         <div class="parcours-card step-optimiser">
           <span class="step-number">02</span>
           <span class="step-badge">Optimiser</span>
-          <h3>Étude d'optimisation assistée par IA</h3>
+          <h3>Diagnostic de rentabilité</h3>
           <p class="step-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
           <ul>
-            <li>Diagnostic flash (pré-audit) ou audit des processus métier</li>
+            <li>Diagnostic flash gratuit (30 min, sans engagement)</li>
+            <li>Audit complet des processus métier</li>
             <li>Cartographie des tâches répétitives et automatisables</li>
-            <li>Recommandations priorisées + Estimation ROI</li>
+            <li>Recommandations priorisées + estimation ROI</li>
           </ul>
+          <p class="step-free">Flash : gratuit</p>
+          <p class="step-price">Audit complet : 1 000€ HT</p>
           <p class="step-result">Actions prioritaires · Gains estimés · Démarrage rapide</p>
+          <span class="rgpd-badge">✓ Conforme RGPD</span>
         </div>
 
         <!-- ÉTAPE 03 — PILOTER (IoT) -->
         <div class="parcours-card step-piloter">
           <span class="step-number">03</span>
-          <span class="step-badge">Piloter</span>
-          <h3>Exploitation des données terrain</h3>
+          <span class="step-badge">Pour aller plus loin</span>
+          <h3>IoT &amp; données terrain</h3>
           <p class="step-desc">Captez, comprenez et anticipez grâce à vos données terrain.</p>
-
           <ul>
             <li>Diagnostic data et étude de faisabilité</li>
-            <li>Capteurs IoT &amp; domotique sur site</li>
-            <li>Plan d'exploitation IA</li>
+            <li>Capteurs connectés sur site</li>
+            <li>Plan d'exploitation et de visualisation des données</li>
           </ul>
           <p class="step-result">Décisions pilotées par la donnée terrain</p>
+          <span class="rgpd-badge">✓ Conforme RGPD</span>
         </div>
 
       </div>
@@ -470,16 +610,75 @@
 
       <div class="cas-grid">
         <div class="cas-card">
-          <h4>Artisan / TPE</h4>
-          <p>L'artisan dicte son devis à la voix, l'IA le rédige et prépare un brouillon prêt à être envoyé au client.</p>
+          <h4>Artisan / TPE — Devis à la voix</h4>
+          <div class="pas-block">
+            <span class="pas-label">Problème</span>
+            <p>45 minutes par devis, chaque jour. Du temps perdu sur de l'administratif.</p>
+          </div>
+          <div class="pas-block action">
+            <span class="pas-label">Action</span>
+            <p>L'artisan dicte ses notes au téléphone, en rentrant du chantier.</p>
+          </div>
+          <div class="pas-block solution">
+            <span class="pas-label">Résultat</span>
+            <p>Le devis est rédigé, mis en forme et prêt à envoyer en 3 minutes.</p>
+          </div>
         </div>
         <div class="cas-card">
-          <h4>Agence d'intérim</h4>
-          <p>Agent IA qui pré-qualifie les candidatures, trie les CV et prépare les fiches de poste en quelques secondes.</p>
+          <h4>Agence d'intérim — Tri de candidatures</h4>
+          <div class="pas-block">
+            <span class="pas-label">Problème</span>
+            <p>2 heures pour trier 50 CV à chaque ouverture de poste.</p>
+          </div>
+          <div class="pas-block action">
+            <span class="pas-label">Action</span>
+            <p>Les CV sont analysés automatiquement selon les critères du poste.</p>
+          </div>
+          <div class="pas-block solution">
+            <span class="pas-label">Résultat</span>
+            <p>Les profils pertinents remontent en tête, classés et commentés, en quelques secondes.</p>
+          </div>
         </div>
         <div class="cas-card">
-          <h4>Direction PME</h4>
-          <p>Synthèse hebdomadaire automatique des indicateurs clés, préparée par un agent IA avant chaque réunion.</p>
+          <h4>Direction PME — Réunion préparée</h4>
+          <div class="pas-block">
+            <span class="pas-label">Problème</span>
+            <p>Réunion de direction sans chiffres à jour — décisions prises à l'aveugle.</p>
+          </div>
+          <div class="pas-block action">
+            <span class="pas-label">Action</span>
+            <p>Un rapport est généré automatiquement chaque lundi matin.</p>
+          </div>
+          <div class="pas-block solution">
+            <span class="pas-label">Résultat</span>
+            <p>Chiffres clés, tendances et alertes — prêts avant la réunion, sans saisie manuelle.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— FAQ ——— -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Questions <span class="text-accent">fréquentes</span></h2>
+      <p class="section-subtitle">Les vrais doutes, les vraies réponses.</p>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>"Est-ce que c'est vraiment accessible pour mon activité ?"</h3>
+          <p>Oui. J'adapte chaque intervention à votre métier et votre niveau. Pas besoin d'être expert en informatique — si vous utilisez un smartphone, vous pouvez utiliser nos outils.</p>
+        </div>
+        <div class="faq-item">
+          <h3>"Combien de temps avant de voir des résultats ?"</h3>
+          <p>En général, moins de 30 jours pour les premiers gains. L'atelier pratique se fait en demi-journée. Le diagnostic flash, en 30 minutes chrono.</p>
+        </div>
+        <div class="faq-item">
+          <h3>"Est-ce que mes données sont en sécurité ?"</h3>
+          <p>Oui. Toutes nos solutions sont conformes RGPD. Hébergement français disponible. Je ne vends aucune donnée et travaille avec des outils européens quand c'est possible.</p>
+        </div>
+        <div class="faq-item">
+          <h3>"Et si ça ne convient pas à mon équipe ?"</h3>
+          <p>Le diagnostic flash est gratuit et sans engagement. Si l'IA ne vous apporte pas de valeur concrète, je ne vous propose rien. Simple.</p>
         </div>
       </div>
     </div>
@@ -502,13 +701,43 @@
     </div>
   </section>
 
+  <!-- ——— TALLY : PRISE DE RDV ——— -->
+  <section id="rdv" style="border-top: 1px solid var(--clr-border);">
+    <div class="container" style="max-width: 760px;">
+      <h2 class="section-title">Prendre <span class="text-accent">rendez-vous</span></h2>
+      <iframe
+        data-tally-src="https://tally.so/embed/PLACEHOLDER_RDV?alignLeft=1&hideTitle=1&transparentBackground=1"
+        loading="lazy"
+        width="100%"
+        height="500"
+        frameborder="0"
+        title="Prise de rendez-vous"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- ——— TALLY : EXPRIMER MON BESOIN ——— -->
+  <section id="besoin" style="border-top: 1px solid var(--clr-border);">
+    <div class="container" style="max-width: 760px;">
+      <h2 class="section-title">Exprimer <span class="text-accent">mon besoin</span></h2>
+      <iframe
+        data-tally-src="https://tally.so/embed/PLACEHOLDER_BESOIN?alignLeft=1&hideTitle=1&transparentBackground=1"
+        loading="lazy"
+        width="100%"
+        height="500"
+        frameborder="0"
+        title="Exprimer mon besoin"
+      ></iframe>
+    </div>
+  </section>
+
   <!-- ——— FOOTER ——— -->
   <footer>
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
           <img src="/LogoDclickV2.png" alt="Dclick IA" />
-          <span>Le déclic IA pour votre métier</span>
+          <span>Automatisation simple. Résultats concrets.</span>
         </div>
         <div class="footer-links">
           <a href="#">Mentions légales</a>
@@ -521,5 +750,7 @@
     </div>
   </footer>
 
+
+  <script src="https://tally.so/widgets/embed.js" is:inline></script>
 </body>
 </html>
