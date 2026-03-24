@@ -1,0 +1,66 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Contact — Dclick IA | Consultant IA, Gien, Loiret"
+  description="Contactez Dclick IA pour votre projet d'automatisation. Diagnostic flash gratuit (30 min). Basé à Gien, Centre-Val de Loire."
+>
+
+  <!-- ——— PAGE HERO ——— -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="page-tag">Contact</span>
+      <h1>Contactez Dclick IA</h1>
+      <p class="page-lead">
+        Une question, un projet, une idée à tester ? Écrivez-moi ou remplissez le formulaire — je réponds sous 24h.
+      </p>
+    </div>
+  </div>
+
+  <!-- ——— CONTACT DIRECT ——— -->
+  <section>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px;">
+
+        <div class="pain-card" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p class="pain-quote" style="font-style: normal; font-size: 1rem; font-weight: 600;">Par email</p>
+          <a href="mailto:contact@dclickia.fr" style="color: var(--clr-accent); font-size: 1.05rem; font-weight: 600; text-decoration: none;">
+            contact@dclickia.fr
+          </a>
+          <p style="font-size: 0.85rem; color: var(--clr-text-muted);">Réponse sous 24h en jours ouvrés.</p>
+        </div>
+
+        <div class="pain-card" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p class="pain-quote" style="font-style: normal; font-size: 1rem; font-weight: 600;">Localisation</p>
+          <p style="color: var(--clr-text); font-size: 1rem;">Gien — Centre-Val de Loire</p>
+          <p style="font-size: 0.85rem; color: var(--clr-text-muted);">Interventions sur site dans le Loiret et alentours. À distance partout en France.</p>
+        </div>
+
+        <div class="pain-card" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p class="pain-quote" style="font-style: normal; font-size: 1rem; font-weight: 600;">Diagnostic flash gratuit</p>
+          <p style="color: var(--clr-text); font-size: 0.95rem;">30 minutes pour identifier vos 3 premiers gains IA.</p>
+          <a href="/diagnostic-flash" class="btn-primary btn-sm" style="width: fit-content;">Réserver un créneau →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ——— FORMULAIRE BESOIN ——— -->
+  <section id="besoin" style="border-top: 1px solid var(--clr-border);">
+    <div class="container" style="max-width: 760px;">
+      <h2 class="section-title">Exprimer <span class="text-accent">mon besoin</span></h2>
+      <p class="intro-text">Décrivez votre situation — je reviens vers vous avec une première analyse.</p>
+      <iframe
+        data-tally-src="https://tally.so/embed/pbVa78?alignLeft=1&hideTitle=1&transparentBackground=1"
+        loading="lazy"
+        width="100%"
+        height="500"
+        frameborder="0"
+        title="Exprimer mon besoin"
+      ></iframe>
+    </div>
+  </section>
+
+</SiteLayout>
