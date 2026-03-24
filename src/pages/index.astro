@@ -386,6 +386,41 @@
     .pas-block p { font-size: 0.9rem; color: var(--clr-text-muted); margin: 0; line-height: 1.5; }
     .pas-block.action p, .pas-block.solution p { color: var(--clr-text); }
     .pas-block.solution .pas-label { color: var(--clr-success); }
+
+    /* — Hero grid fusionné — */
+    .hero-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-top: 2rem; width: 100%;
+    }
+    .hero-grid-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.25rem;
+    }
+    .hero-grid-label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--clr-text-muted); font-weight: 600;
+    }
+    .hero-grid-text {
+      font-size: 0.95rem; color: var(--clr-text); font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* — Sticky CTA mobile — */
+    .sticky-mobile-cta {
+      display: none; position: fixed; bottom: 1rem; left: 50%;
+      transform: translateX(-50%); z-index: 50;
+    }
+    .sticky-mobile-cta a {
+      background: var(--clr-accent); color: #fff;
+      padding: 0.75rem 1.5rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      white-space: nowrap; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .sticky-mobile-cta { display: block; }
+    }
   </style>
 </head>
 
@@ -400,7 +435,7 @@
         <a href="#offres">Offres</a>
         <a href="#cas-usage">Cas d'usage</a>
         <a href="#contact">Contact</a>
-        <a href="#besoin" class="btn-primary btn-sm">Diagnostic gratuit →</a>
+        <a href="#diagnostic" class="btn-primary btn-sm">Demander mon diagnostic gratuit →</a>
       </div>
     </div>
   </nav>
@@ -418,22 +453,34 @@
       </p>
 
       <div class="hero-cta animate-fade-up delay-3">
-        <a href="#rdv" class="btn-primary">Prendre rendez-vous →</a>
-        <a href="#besoin" class="btn-outline">Exprimer mon besoin</a>
+        <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
       </div>
 
-      <div class="hero-metrics animate-fade-up delay-4">
-        <div class="metric">
+      <!-- BLOC FUSIONNÉ — Stats + Contexte -->
+      <div class="hero-grid animate-fade-up delay-4">
+        <div class="hero-grid-card">
           <span class="metric-value">10h+</span>
-          <span class="metric-label">gagnées par mois sur l'administratif</span>
+          <span class="metric-label">gagnées/mois sur l'administratif</span>
         </div>
-        <div class="metric">
-          <span class="metric-value">&lt; 30 j</span>
+        <div class="hero-grid-card">
+          <span class="metric-value">&lt; 30j</span>
           <span class="metric-label">pour les premiers résultats</span>
         </div>
-        <div class="metric">
+        <div class="hero-grid-card">
           <span class="metric-value">0</span>
           <span class="metric-label">formation lourde nécessaire</span>
+        </div>
+        <div class="hero-grid-card">
+          <span class="hero-grid-label">Pour qui</span>
+          <span class="hero-grid-text">TPE & PME · Artisans · Indépendants</span>
+        </div>
+        <div class="hero-grid-card">
+          <span class="hero-grid-label">Secteurs</span>
+          <span class="hero-grid-text">BTP · Commerce de proximité · Immobilier · Services aux entreprises</span>
+        </div>
+        <div class="hero-grid-card">
+          <span class="hero-grid-label">Prochain pas</span>
+          <a href="#diagnostic" class="hero-grid-text" style="color: var(--clr-accent); text-decoration: none;">Diagnostic gratuit 30 min →</a>
         </div>
       </div>
 
@@ -571,7 +618,7 @@
           <h3>Diagnostic de rentabilité</h3>
           <p class="step-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
           <ul>
-            <li>Diagnostic flash gratuit (30 min, sans engagement)</li>
+            <li>Diagnostic gratuit 30 min, sans engagement</li>
             <li>Audit complet des processus métier</li>
             <li>Cartographie des tâches répétitives et automatisables</li>
             <li>Recommandations priorisées + estimation ROI</li>
@@ -688,8 +735,8 @@
     <div class="container">
       <div class="cta-box">
         <h2 class="section-title">Prêt à faire le <span class="text-accent">premier pas</span> ?</h2>
-        <p>Commençons par un audit flash gratuit de 30 min pour identifier vos 3 premiers gains IA.</p>
-        <a href="mailto:contact@dclickia.fr" class="btn-primary">contact@dclickia.fr</a>
+        <p>Commençons par un diagnostic gratuit de 30 min pour identifier vos 3 premiers gains IA.</p>
+        <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
         <div class="cta-meta">
           <span>Sans engagement</span>
         </div>
@@ -700,32 +747,17 @@
     </div>
   </section>
 
-  <!-- ——— TALLY : PRISE DE RDV ——— -->
-  <section id="rdv" style="border-top: 1px solid var(--clr-border);">
+  <!-- ——— TALLY : DIAGNOSTIC GRATUIT ——— -->
+  <section id="diagnostic" style="border-top: 1px solid var(--clr-border);">
     <div class="container" style="max-width: 760px;">
-      <h2 class="section-title">Prendre <span class="text-accent">rendez-vous</span></h2>
-      <iframe
-        data-tally-src="https://tally.so/embed/J907RX?alignLeft=1&hideTitle=1&transparentBackground=1"
-        loading="lazy"
-        width="100%"
-        height="500"
-        frameborder="0"
-        title="Prise de rendez-vous"
-      ></iframe>
-    </div>
-  </section>
-
-  <!-- ——— TALLY : EXPRIMER MON BESOIN ——— -->
-  <section id="besoin" style="border-top: 1px solid var(--clr-border);">
-    <div class="container" style="max-width: 760px;">
-      <h2 class="section-title">Exprimer <span class="text-accent">mon besoin</span></h2>
+      <h2 class="section-title">Diagnostic gratuit <span class="text-accent">30 min</span></h2>
       <iframe
         data-tally-src="https://tally.so/embed/pbVa78?alignLeft=1&hideTitle=1&transparentBackground=1"
         loading="lazy"
         width="100%"
         height="500"
         frameborder="0"
-        title="Exprimer mon besoin"
+        title="Diagnostic gratuit 30 min"
       ></iframe>
     </div>
   </section>
@@ -749,6 +781,11 @@
     </div>
   </footer>
 
+
+  <!-- CTA STICKY MOBILE -->
+  <div class="sticky-mobile-cta">
+    <a href="#diagnostic">Diagnostic gratuit 30 min →</a>
+  </div>
 
   <script src="https://tally.so/widgets/embed.js" is:inline></script>
 </body>
