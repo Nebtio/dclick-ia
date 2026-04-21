@@ -1,6 +1,5 @@
 ---
-// Dclick IA – Landing Page restructurée (3 offres)
-// Astro 4 + CSS custom
+// Dclick IA – Landing Page — Dark SaaS Premium Style
 ---
 
 <html lang="fr">
@@ -8,532 +7,975 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Consultant IA pour TPE & PME — Automatisation & IA | Dclick IA, Gien</title>
-  <meta name="description" content="Automatisez vos devis, relances et saisies avec l'IA. Résultats en moins de 30 jours, sans formation lourde. Diagnostic gratuit gratuit (30 min). Consultant indépendant basé à Gien, Centre-Val de Loire." />
+  <meta name="description" content="Automatisez vos devis, relances et saisies avec l'IA. Résultats en moins de 30 jours, sans formation lourde. Diagnostic gratuit (30 min). Consultant indépendant basé à Gien, Centre-Val de Loire." />
   <link rel="icon" type="image/png" href="/LogoDclickV2.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --clr-bg: #0A0A0A;
-      --clr-surface: #141414;
-      --clr-surface-alt: #1a1e28;
-      --clr-accent: #2E7BD4;
-      --clr-accent-hover: #3B82F6;
-      --clr-accent-glow: rgba(46, 123, 212, 0.25);
-      --clr-text: #e8e6e3;
-      --clr-text-muted: #A0AEC0;
-      --clr-border: #222222;
-      --clr-success: #34d399;
-      --clr-info: #60a5fa;
-      --clr-iot: #a78bfa;
-      --font-heading: 'Sora', sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --bg:        #080808;
+      --surface:   #101010;
+      --surface-2: #161616;
+      --surface-3: #1c1c1c;
+      --border:    rgba(255,255,255,0.06);
+      --border-md: rgba(255,255,255,0.1);
+      --accent:    #2B6CB0;
+      --accent-dim: rgba(43,108,176,0.18);
+      --accent-glow: rgba(43,108,176,0.12);
+      --success:   #34D399;
+      --purple:    #A78BFA;
+      --text:      #E8E6E3;
+      --muted:     #6B7280;
+      --muted-2:   #9CA3AF;
+      --font:      'Sora', sans-serif;
+      --mono:      'Space Mono', monospace;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
-      font-family: var(--font-heading);
-      background: var(--clr-bg);
-      color: var(--clr-text);
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* — Utility — */
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
-    .text-accent { color: var(--clr-accent); }
-    .text-muted { color: var(--clr-text-muted); }
-    .font-mono { font-family: var(--font-mono); }
+    /* ─── Grain overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
 
-    /* — Animations — */
+    /* ─── Utility ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .accent    { color: var(--accent); }
+    .muted     { color: var(--muted-2); }
+    .mono      { font-family: var(--mono); }
+
+    /* ─── Animations ─── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px var(--clr-accent-glow); }
-      50% { box-shadow: 0 0 40px var(--clr-accent-glow), 0 0 60px rgba(46,123,212,0.1); }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
     }
-    .animate-fade-up { opacity: 0; animation: fadeUp 0.7s ease-out forwards; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
+    .au { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+    .d4 { animation-delay: 0.38s; }
+    .d5 { animation-delay: 0.50s; }
 
-    /* — Nav — */
+    /* ─────────────────────────────────────────
+       NAV — floating pill
+    ───────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-      background: rgba(12, 14, 19, 0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--clr-border);
-      overflow: visible;
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2rem);
+      max-width: 960px;
+      z-index: 200;
+      border-radius: 100px;
+      background: rgba(10,10,10,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-md);
+      padding: 0.6rem 1.25rem;
     }
-    nav .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1140px; margin: 0 auto; padding: 0.75rem 1.5rem;
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    nav img { height: 40px; transform: scale(4); transform-origin: left center; margin-left: 90px; margin-right: 90px; }
-    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
-    nav .nav-links a {
-      color: var(--clr-text-muted); text-decoration: none;
-      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    .nav-brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: -0.05em;
     }
-    nav .nav-links a:hover { color: var(--clr-accent); }
+    .nav-brand .ia { color: #2B6CB0; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--text);
+      color: var(--bg);
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: #fff; transform: scale(1.03); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-md);
+      color: var(--text);
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
 
-    /* — Buttons — */
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--clr-accent); color: var(--clr-bg);
-      padding: 0.75rem 1.75rem; border-radius: 8px;
-      font-weight: 600; font-size: 0.95rem;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover {
-      background: var(--clr-accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px var(--clr-accent-glow);
-    }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: transparent; color: var(--clr-accent);
-      padding: 0.75rem 1.75rem; border-radius: 8px;
-      font-weight: 600; font-size: 0.95rem;
-      text-decoration: none; border: 1px solid var(--clr-accent);
-      transition: all 0.3s ease;
-    }
-    .btn-secondary:hover { background: rgba(46,123,212,0.1); transform: translateY(-2px); }
-    .btn-sm { padding: 0.5rem 1.25rem; font-size: 0.85rem; }
-
-    /* — Hero — */
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
     .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 8rem 0 4rem;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 0 4rem;
+      position: relative;
+      overflow: hidden;
       background:
-        radial-gradient(ellipse at 20% 50%, rgba(46,123,212,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(96,165,250,0.04) 0%, transparent 50%),
-        var(--clr-bg);
+        linear-gradient(to right, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.62) 55%, rgba(8,8,8,0.18) 100%),
+        url('/DclikAtelier.png') center right / cover no-repeat;
     }
+
+    /* diagonal decorative lines */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        repeating-linear-gradient(
+          -52deg,
+          transparent 0px,
+          transparent 120px,
+          rgba(255,255,255,0.015) 120px,
+          rgba(255,255,255,0.015) 121px
+        );
+    }
+
+    /* radial glow left */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 740px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 700; line-height: 1.15; margin-bottom: 1.25rem;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: #F0EFEC;
     }
-    .hero .subtitle {
-      font-size: 1.05rem; color: var(--clr-text-muted);
-      margin-bottom: 0.75rem; letter-spacing: 0.5px;
+    .hero h1 em {
+      font-style: normal;
+      color: var(--muted-2);
+      font-weight: 300;
     }
-    .hero .tagline {
-      font-size: 1.1rem; line-height: 1.7; max-width: 600px;
-      margin-bottom: 1.5rem; border-left: 3px solid var(--clr-accent);
-      padding-left: 1rem; color: var(--clr-text);
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted-2);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
     }
-    .hero .trust-signals {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 2rem;
+
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
     }
-    .hero .trust-signals span::before { content: '◆ '; color: var(--clr-accent); }
-    .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-    /* — Hero new elements — */
-    .badge-location {
-      display: inline-block; font-size: 0.8rem; font-weight: 600;
-      color: var(--clr-accent); background: rgba(46,123,212,0.1);
-      border: 1px solid rgba(46,123,212,0.3); border-radius: 100px;
-      padding: 0.3rem 0.9rem; margin-bottom: 1.5rem;
-      letter-spacing: 0.3px;
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--text);
+      color: var(--bg);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
     }
-    .hero-subtitle {
-      font-size: 1.05rem; color: var(--clr-text-muted);
-      line-height: 1.7; margin-bottom: 2rem; max-width: 580px;
+    .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--muted-2);
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-md);
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
     }
-    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: transparent; color: var(--clr-text);
-      padding: 0.75rem 1.75rem; border-radius: 8px;
-      font-weight: 600; font-size: 0.95rem;
-      text-decoration: none; border: 1px solid var(--clr-border);
-      transition: all 0.3s ease;
-    }
-    .btn-outline:hover { border-color: var(--clr-accent); color: var(--clr-accent); transform: translateY(-2px); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+    /* hero metrics strip */
     .hero-metrics {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      margin-bottom: 2rem; padding: 1.5rem 2rem;
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 12px; width: fit-content;
+      display: flex;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      width: fit-content;
+      max-width: 100%;
     }
-    .metric { display: flex; flex-direction: column; gap: 0.2rem; }
-    .metric-value {
-      font-size: 1.75rem; font-weight: 700; color: var(--clr-accent);
-      font-family: var(--font-mono); line-height: 1;
+    .hero-metric {
+      padding: 1.1rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      border-right: 1px solid var(--border);
     }
-    .metric-label { font-size: 0.8rem; color: var(--clr-text-muted); }
-    .hero-reassurance {
-      font-size: 0.82rem; color: var(--clr-text-muted);
-      border-left: 3px solid var(--clr-border); padding-left: 0.75rem;
+    .hero-metric:last-child { border-right: none; }
+    .metric-val {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .metric-lbl { font-size: 0.72rem; color: var(--muted); }
+
+    /* ─────────────────────────────────────────
+       SHARED SECTION HEADER
+    ───────────────────────────────────────── */
+    .sec { padding: 5.5rem 0; }
+    .sec-header { margin-bottom: 3rem; }
+    .sec-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+    .sec-title {
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: #F0EFEC;
+    }
+    .sec-sub {
+      font-size: 0.95rem;
+      color: var(--muted-2);
+      max-width: 540px;
+      line-height: 1.75;
     }
 
-    /* — Section titles — */
-    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 0.75rem; }
-    .section-subtitle { color: var(--clr-text-muted); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; }
-    section { padding: 5rem 0; }
+    /* ─────────────────────────────────────────
+       MANIFESTE
+    ───────────────────────────────────────── */
+    .manifeste-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, transparent 50%);
+    }
+    .manifeste-inner { max-width: 720px; }
+    .manifeste-inner p {
+      font-size: 1rem;
+      color: var(--muted-2);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .manifeste-inner .role {
+      font-size: 1.05rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .manifeste-signature {
+      border-left: 2px solid var(--border-md);
+      padding-left: 1.1rem;
+      margin-top: 0.5rem;
+    }
+    .manifeste-signature p { margin-bottom: 0; }
+    .manifeste-signature strong { color: var(--text); font-weight: 600; }
 
-    /* — Manifeste — */
-    .manifeste {
-      border-top: 1px solid var(--clr-border);
-      border-bottom: 1px solid var(--clr-border);
-      background: linear-gradient(135deg, rgba(46,123,212,0.04) 0%, transparent 60%);
+    /* ─────────────────────────────────────────
+       FONDATEUR
+    ───────────────────────────────────────── */
+    .fondateur-wrap {
+      border-top: 1px solid var(--border);
     }
-    .manifeste-inner {
-      max-width: 760px; margin: 0 auto;
+    .fondateur-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      max-width: 820px;
     }
-    .manifeste-tag {
-      font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 2px; color: var(--clr-accent);
-      margin-bottom: 1.5rem; display: block;
+    .fondateur-photo-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
     }
-    .manifeste h2 {
-      font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700;
-      margin-bottom: 1.5rem; line-height: 1.3;
+    .fondateur-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent), transparent 60%, var(--accent));
+      animation: spin 8s linear infinite;
     }
-    .manifeste .intro {
-      font-size: 1.05rem; color: var(--clr-text-muted);
-      line-height: 1.8; margin-bottom: 1.25rem;
-    }
-    .manifeste .role {
-      font-size: 1rem; color: var(--clr-text-muted);
-      line-height: 1.8; margin-bottom: 1.5rem;
-    }
-    .manifeste ul.manifeste-list {
-      list-style: none; padding: 0; margin-bottom: 2rem;
-    }
-    .manifeste ul.manifeste-list li {
-      font-size: 1rem; color: var(--clr-text);
-      padding: 0.4rem 0 0.4rem 1.5rem; position: relative;
-    }
-    .manifeste ul.manifeste-list li::before {
-      content: '→'; position: absolute; left: 0; color: var(--clr-accent);
-    }
-    .manifeste .signature {
-      font-size: 0.95rem; color: var(--clr-text-muted);
-      font-style: italic; border-left: 3px solid var(--clr-accent);
-      padding-left: 1rem; line-height: 1.8;
-    }
-    .manifeste .signature strong { color: var(--clr-text); font-style: normal; }
-
-    /* — Pain points — */
-    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .pain-card {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 12px; padding: 2rem; transition: all 0.3s ease;
-    }
-    .pain-card:hover { border-color: var(--clr-accent); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-    .pain-card .pain-quote { font-style: italic; color: var(--clr-text-muted); margin-bottom: 1rem; font-size: 0.95rem; }
-    .pain-card .pain-answer { color: var(--clr-accent); font-weight: 600; font-size: 0.95rem; }
-
-    /* — Profils — */
-    .profils-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-    .profil-card {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;
-    }
-    .profil-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--clr-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
-    }
-    .profil-card:hover::before { transform: scaleX(1); }
-    .profil-card:hover { border-color: var(--clr-accent); transform: translateY(-4px); }
-    .profil-card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
-    .profil-card .profil-pain { font-style: italic; color: var(--clr-text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
-    .profil-card .profil-reco { font-family: var(--font-mono); font-size: 0.85rem; color: var(--clr-accent); line-height: 1.8; }
-
-    /* — Parcours — */
-    .parcours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-    .parcours-card {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 16px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: all 0.4s ease;
-    }
-    .parcours-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-    .parcours-card .step-number {
-      font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700;
-      color: rgba(46,123,212,0.15); position: absolute; top: 1rem; right: 1.5rem; line-height: 1;
-    }
-    .parcours-card .step-badge {
-      display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 2px; padding: 0.3rem 0.75rem; border-radius: 4px; margin-bottom: 1rem;
-    }
-    .parcours-card.step-maitriser .step-badge { background: rgba(46,123,212,0.15); color: var(--clr-accent); }
-    .parcours-card.step-maitriser:hover { border-color: var(--clr-accent); }
-    .parcours-card.step-optimiser .step-badge { background: rgba(52,211,153,0.15); color: var(--clr-success); }
-    .parcours-card.step-optimiser:hover { border-color: var(--clr-success); }
-    .parcours-card.step-piloter .step-badge { background: rgba(167,139,250,0.15); color: var(--clr-iot); }
-    .parcours-card.step-piloter:hover { border-color: var(--clr-iot); }
-    .parcours-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-    .parcours-card .step-desc { color: var(--clr-text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
-    .parcours-card ul { list-style: none; padding: 0; }
-    .parcours-card ul li { font-size: 0.9rem; color: var(--clr-text); padding: 0.35rem 0 0.35rem 1.5rem; position: relative; }
-    .parcours-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--clr-accent); font-weight: 600; }
-    .parcours-card.step-optimiser ul li::before { color: var(--clr-success); }
-    .parcours-card.step-piloter ul li::before { color: var(--clr-iot); }
-    .parcours-card .step-format { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--clr-border); font-size: 0.85rem; color: var(--clr-text-muted); }
-    .parcours-card .step-result { margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
-    .parcours-card.step-maitriser .step-result { color: var(--clr-accent); }
-    .parcours-card.step-optimiser .step-result { color: var(--clr-success); }
-    .parcours-card.step-piloter .step-result { color: var(--clr-iot); }
-
-    /* — IoT sub-grid — */
-    .iot-sub-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1rem; }
-    .iot-sub-card { background: var(--clr-surface-alt); border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; min-width: 0; overflow: hidden; }
-    .iot-sub-card h4 { font-size: 0.8rem; color: var(--clr-iot); margin-bottom: 0.4rem; font-weight: 700; white-space: nowrap; }
-    .iot-sub-card p { font-size: 0.75rem; color: var(--clr-text-muted); line-height: 1.5; word-break: break-word; }
-
-    /* — Cas d'usage — */
-    .cas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-    .cas-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 12px; padding: 2rem; transition: all 0.3s ease; }
-    .cas-card:hover { border-color: var(--clr-accent); transform: translateY(-3px); }
-    .cas-card h4 { color: var(--clr-accent); font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
-    .cas-card p { font-size: 0.95rem; color: var(--clr-text-muted); font-style: italic; line-height: 1.6; }
-
-    /* — CTA final — */
-    .cta-section {
-      text-align: center;
-      background: radial-gradient(ellipse at center, rgba(46,123,212,0.08) 0%, transparent 60%), var(--clr-bg);
-    }
-    .cta-section .cta-box {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 16px; padding: 3rem 2rem; max-width: 700px; margin: 0 auto;
-      animation: glow 4s ease-in-out infinite;
-    }
-    .cta-section h2 { margin-bottom: 1rem; }
-    .cta-section p { color: var(--clr-text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
-    .cta-meta { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; font-size: 0.85rem; color: var(--clr-text-muted); }
-
-    /* — Footer — */
-    footer { border-top: 1px solid var(--clr-border); padding: 2.5rem 0; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-brand { display: flex; align-items: center; gap: 0.75rem; }
-    .footer-brand img { height: 32px; }
-    .footer-brand span { font-size: 0.85rem; color: var(--clr-text-muted); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { color: var(--clr-text-muted); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--clr-accent); }
-    .footer-copy { width: 100%; text-align: center; font-size: 0.8rem; color: var(--clr-text-muted); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--clr-border); }
-
-    /* — Mobile nav — */
-    .nav-toggle { display: none; background: none; border: none; color: var(--clr-text); font-size: 1.5rem; cursor: pointer; }
-    @media (max-width: 768px) {
-      .nav-toggle { display: block; }
-      nav .nav-links {
-        display: none; position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--clr-surface); flex-direction: column; padding: 1.5rem;
-        border-bottom: 1px solid var(--clr-border);
-      }
-      nav .nav-links.open { display: flex; }
-      .iot-sub-grid { grid-template-columns: 1fr; }
-    }
-
-    /* — Fondateur — */
-    .fondateur { border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
-    .fondateur-inner {
-      display: grid; grid-template-columns: auto 1fr;
-      gap: 3rem; align-items: center; max-width: 900px; margin: 0 auto;
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fondateur-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--bg);
+      margin: 3px;
     }
     .fondateur-photo {
-      width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
-      border: 3px solid var(--clr-accent); box-shadow: 0 0 30px var(--clr-accent-glow);
+      position: relative;
+      z-index: 1;
+      width: 194px;
+      height: 194px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 3px;
     }
-    @media (max-width: 768px) {
-      .fondateur-inner { grid-template-columns: 1fr; text-align: center; }
-      .fondateur-photo { margin: 0 auto; }
+    .fondateur-bio .sec-tag { margin-bottom: 0.5rem; }
+    .fondateur-bio h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+      color: #F0EFEC;
+    }
+    .fondateur-bio p {
+      font-size: 0.95rem;
+      color: var(--muted-2);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .fondateur-bio .sig {
+      font-size: 0.9rem;
+      color: var(--muted-2);
+      border-left: 2px solid var(--border-md);
+      padding-left: 0.9rem;
+    }
+    .fondateur-bio .sig strong { color: var(--text); font-weight: 600; }
+
+    /* ─────────────────────────────────────────
+       PAIN CARDS
+    ───────────────────────────────────────── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pain-card {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.25s;
+    }
+    .pain-card:hover { background: var(--surface-2); }
+    .pain-quote {
+      font-style: italic;
+      color: var(--muted-2);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .pain-answer {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
     }
 
-    /* — RGPD badge — */
+    /* ─────────────────────────────────────────
+       PROFILS
+    ───────────────────────────────────────── */
+    .profils-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .profil-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .profil-card:hover {
+      border-color: var(--border-md);
+      transform: translateY(-4px);
+      background: var(--surface-2);
+    }
+    .profil-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .profil-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.6rem;
+      color: #F0EFEC;
+    }
+    .profil-pain {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.1rem;
+      line-height: 1.6;
+    }
+    .profil-reco {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      line-height: 1.9;
+    }
+
+    /* ─────────────────────────────────────────
+       PARCOURS — BENTO STYLE
+    ───────────────────────────────────────── */
+    .parcours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1rem;
+    }
+    .pc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      display: flex;
+      flex-direction: column;
+    }
+    .pc:hover {
+      background: var(--surface-2);
+      border-color: var(--border-md);
+      transform: translateY(-5px);
+    }
+    .pc-num {
+      font-family: var(--mono);
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      position: absolute;
+      top: 0.75rem;
+      right: 1.25rem;
+      line-height: 1;
+      user-select: none;
+    }
+    .pc-badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      margin-bottom: 1.1rem;
+      width: fit-content;
+    }
+    .pc.blue  .pc-badge { background: var(--accent-dim);           color: var(--accent);  }
+    .pc.green .pc-badge { background: rgba(52,211,153,0.14);       color: var(--success); }
+    .pc.purple.pc-badge,
+    .pc.purple .pc-badge { background: rgba(167,139,250,0.14);     color: var(--purple);  }
+    .pc h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: #F0EFEC;
+    }
+    .pc-desc { font-size: 0.9rem; color: var(--muted-2); margin-bottom: 1.25rem; line-height: 1.65; }
+    .pc ul { list-style: none; padding: 0; flex: 1; }
+    .pc ul li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding: 0.3rem 0 0.3rem 1.25rem;
+      position: relative;
+    }
+    .pc ul li::before { content: '✓'; position: absolute; left: 0; font-weight: 700; }
+    .pc.blue   ul li::before { color: var(--accent);  }
+    .pc.green  ul li::before { color: var(--success); }
+    .pc.purple ul li::before { color: var(--purple);  }
+
+    .pc-footer {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .pc-price {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .pc-free { font-size: 0.82rem; color: var(--success); font-weight: 600; margin-bottom: 0.2rem; }
+    .pc.blue   .pc-price { color: var(--accent);  }
+    .pc.green  .pc-price { color: var(--success); }
+    .pc.purple .pc-price { color: var(--purple);  }
+    .pc-format { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.5rem; line-height: 1.5; }
+    .pc-result {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .pc.blue   .pc-result { color: var(--accent);  }
+    .pc.green  .pc-result { color: var(--success); }
+    .pc.purple .pc-result { color: var(--purple);  }
+
     .rgpd-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.75rem; color: var(--clr-success);
-      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2);
-      border-radius: 100px; padding: 0.25rem 0.7rem; margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--success);
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 100px;
+      padding: 0.2rem 0.65rem;
+      margin-top: 0.75rem;
     }
 
-    /* — Step price — */
-    .step-price {
-      font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700;
-      margin-top: 0.5rem; margin-bottom: 0.25rem;
+    /* ─────────────────────────────────────────
+       CAS D'USAGE
+    ───────────────────────────────────────── */
+    .cas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1rem;
     }
-    .step-free {
-      font-size: 0.85rem; color: var(--clr-success); font-weight: 600;
+    .cas-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    .parcours-card.step-maitriser .step-price { color: var(--clr-accent); }
-    .parcours-card.step-optimiser .step-price { color: var(--clr-success); }
-    .parcours-card.step-piloter .step-price { color: var(--clr-iot); }
+    .cas-card:hover {
+      border-color: var(--border-md);
+      transform: translateY(-4px);
+      background: var(--surface-2);
+    }
+    .cas-card h4 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .pas-block { margin-bottom: 1rem; }
+    .pas-block:last-child { margin-bottom: 0; }
+    .pas-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .pas-block.solution .pas-label { color: var(--success); }
+    .pas-block p { font-size: 0.88rem; color: var(--muted-2); line-height: 1.6; }
+    .pas-block.solution p,
+    .pas-block.action  p  { color: var(--text); }
 
-    /* — FAQ — */
-    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
+    /* ─────────────────────────────────────────
+       FAQ
+    ───────────────────────────────────────── */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
     .faq-item {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 12px; padding: 2rem; transition: all 0.3s ease;
+      background: var(--surface);
+      padding: 1.75rem 2rem;
+      transition: background 0.2s;
     }
-    .faq-item:hover { border-color: var(--clr-accent); }
-    .faq-item h3 { font-size: 1rem; color: var(--clr-text); margin-bottom: 0.75rem; font-weight: 600; }
-    .faq-item p { font-size: 0.95rem; color: var(--clr-text-muted); line-height: 1.7; }
-    @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item:hover { background: var(--surface-2); }
+    .faq-item h3 { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.65rem; line-height: 1.5; }
+    .faq-item p  { font-size: 0.88rem; color: var(--muted-2); line-height: 1.7; }
 
-    /* — Cas d'usage PAS — */
-    .pas-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--clr-accent); margin-bottom: 0.2rem; display: block; }
-    .pas-block { margin-bottom: 0.9rem; }
-    .pas-block p { font-size: 0.9rem; color: var(--clr-text-muted); margin: 0; line-height: 1.5; }
-    .pas-block.action p, .pas-block.solution p { color: var(--clr-text); }
-    .pas-block.solution .pas-label { color: var(--clr-success); }
+    /* ─────────────────────────────────────────
+       CTA SECTION
+    ───────────────────────────────────────── */
+    .cta-sec {
+      border-top: 1px solid var(--border);
+      padding: 6rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-sec::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-box {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border-md);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+    }
+    .cta-box h2 {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: #F0EFEC;
+    }
+    .cta-box p {
+      font-size: 0.95rem;
+      color: var(--muted-2);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .cta-meta {
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
 
-    /* — Hero grid fusionné — */
-    .hero-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin-top: 2rem; width: 100%;
+    /* ─────────────────────────────────────────
+       FORM SECTION
+    ───────────────────────────────────────── */
+    .form-sec { border-top: 1px solid var(--border); padding: 5rem 0; }
+    .form-inner { max-width: 720px; margin: 0 auto; }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
     }
-    .hero-grid-card {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.25rem;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-    .hero-grid-label {
-      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--clr-text-muted); font-weight: 600;
+    .footer-brand {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: var(--text);
+      font-size: 1.05rem;
+      letter-spacing: -0.05em;
     }
-    .hero-grid-text {
-      font-size: 0.95rem; color: var(--clr-text); font-weight: 500;
+    .footer-brand .ia { color: #2B6CB0; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      transition: color 0.2s;
     }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─────────────────────────────────────────
+       STICKY MOBILE CTA
+    ───────────────────────────────────────── */
+    .sticky-mob {
+      display: none;
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 150;
+    }
+    .sticky-mob a {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.3);
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
     @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* — Sticky CTA mobile — */
-    .sticky-mobile-cta {
-      display: none; position: fixed; bottom: 1rem; left: 50%;
-      transform: translateX(-50%); z-index: 50;
-    }
-    .sticky-mobile-cta a {
-      background: var(--clr-accent); color: #fff;
-      padding: 0.75rem 1.5rem; border-radius: 100px;
-      font-weight: 600; font-size: 0.9rem; text-decoration: none;
-      white-space: nowrap; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    }
-    @media (max-width: 768px) {
-      .sticky-mobile-cta { display: block; }
+      nav { padding: 0.5rem 1rem; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0; right: 0;
+        background: rgba(10,10,10,0.96);
+        border: 1px solid var(--border-md);
+        border-radius: 16px;
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+      .nav-toggle { display: inline-flex; }
+      .nav-cta.desktop { display: none; }
+      .hero-metrics { flex-direction: column; width: 100%; }
+      .hero-metric { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-metric:last-child { border-bottom: none; }
+      .fondateur-grid { grid-template-columns: 1fr; text-align: center; }
+      .fondateur-photo-wrap { margin: 0 auto; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .sticky-mob { display: block; }
+      .pain-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ——— NAV ——— -->
+  <!-- ════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════ -->
   <nav>
     <div class="nav-inner">
-      <a href="/" style="color: var(--clr-text); text-decoration: none; font-size: 1.1rem; font-weight: 700;">Dclick <span style="color: var(--clr-accent);">IA</span></a>
+      <a href="/" class="nav-brand">Dclick<span class="ia">IA</span></a>
       <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
       <div class="nav-links">
         <a href="#offres">Offres</a>
         <a href="#cas-usage">Cas d'usage</a>
         <a href="#contact">Contact</a>
-        <a href="#diagnostic" class="btn-primary btn-sm">Demander mon diagnostic gratuit →</a>
       </div>
+      <a href="#diagnostic" class="nav-cta desktop">Diagnostic gratuit →</a>
     </div>
   </nav>
 
-  <!-- ——— HERO ——— -->
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
   <section class="hero">
     <div class="container">
-      <span class="badge-location animate-fade-up">● Giennois &amp; Centre-Val de Loire</span>
+      <div class="hero-content">
 
-      <h1 class="animate-fade-up delay-1">Libérez vos journées des tâches que personne ne veut faire.</h1>
+        <div class="hero-badge au d1">
+          <span class="hero-badge-dot"></span>
+          Giennois &amp; Centre-Val de Loire
+        </div>
 
-      <p class="hero-subtitle animate-fade-up delay-2">
-        Dclick IA automatise vos devis, relances et saisies administratives.<br />
-        Sans projet complexe, sans formation lourde. Résultats en moins de 30 jours.
-      </p>
+        <h1 class="au d2">
+          Libérez vos journées<br />
+          des tâches que<br />
+          <em>personne ne veut faire.</em>
+        </h1>
 
-      <div class="hero-cta animate-fade-up delay-3">
-        <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
+        <p class="hero-sub au d3">
+          Dclick IA automatise vos devis, relances et saisies administratives.
+          Sans projet complexe, sans formation lourde.
+          Résultats en moins de 30 jours.
+        </p>
+
+        <div class="hero-actions au d4">
+          <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
+          <a href="#offres" class="btn-ghost">Voir les offres</a>
+        </div>
+
+        <div class="hero-metrics au d5">
+          <div class="hero-metric">
+            <span class="metric-val">10h+</span>
+            <span class="metric-lbl">gagnées / mois</span>
+          </div>
+          <div class="hero-metric">
+            <span class="metric-val">&lt;&nbsp;30j</span>
+            <span class="metric-lbl">premiers résultats</span>
+          </div>
+          <div class="hero-metric">
+            <span class="metric-val">0</span>
+            <span class="metric-lbl">formation lourde</span>
+          </div>
+          <div class="hero-metric">
+            <span class="metric-val mono" style="font-size:0.75rem; color: var(--muted-2); padding-top:0.2rem;">RGPD · FR 🇫🇷</span>
+            <span class="metric-lbl">données hébergées en France</span>
+          </div>
+        </div>
+
       </div>
-
-      <!-- BLOC FUSIONNÉ — Stats + Contexte -->
-      <div class="hero-grid animate-fade-up delay-4">
-        <div class="hero-grid-card">
-          <span class="metric-value">10h+</span>
-          <span class="metric-label">gagnées/mois sur l'administratif</span>
-        </div>
-        <div class="hero-grid-card">
-          <span class="metric-value">&lt; 30j</span>
-          <span class="metric-label">pour les premiers résultats</span>
-        </div>
-        <div class="hero-grid-card">
-          <span class="metric-value">0</span>
-          <span class="metric-label">formation lourde nécessaire</span>
-        </div>
-        <div class="hero-grid-card">
-          <span class="hero-grid-label">Pour qui</span>
-          <span class="hero-grid-text">TPE & PME · Artisans · Indépendants</span>
-        </div>
-        <div class="hero-grid-card">
-          <span class="hero-grid-label">Secteurs</span>
-          <span class="hero-grid-text">BTP · Commerce de proximité · Immobilier · Services aux entreprises</span>
-        </div>
-        <div class="hero-grid-card">
-          <span class="hero-grid-label">Prochain pas</span>
-          <a href="#diagnostic" class="hero-grid-text" style="color: var(--clr-accent); text-decoration: none;">Diagnostic gratuit 30 min →</a>
-        </div>
-      </div>
-
-      <p class="hero-reassurance animate-fade-up delay-4">
-        Hébergement français disponible · Conforme RGPD · Interlocuteur unique, basé à Gien
-      </p>
     </div>
   </section>
 
-  <!-- ——— MANIFESTE ——— -->
-  <section class="manifeste">
+  <!-- ════════════════════════════════════════
+       MANIFESTE
+  ════════════════════════════════════════ -->
+  <section class="sec manifeste-wrap">
     <div class="container">
       <div class="manifeste-inner">
-        <span class="manifeste-tag">Une approche simple et concrète de l'IA</span>
-        <h2>Aujourd'hui, l'intelligence artificielle devient accessible aux entreprises de toutes tailles.</h2>
-        <p class="intro">
+        <span class="sec-tag">Une approche simple et concrète</span>
+        <h2 class="sec-title">Aujourd'hui, l'IA devient accessible à toutes les entreprises.</h2>
+        <p>
           Pourtant, beaucoup de dirigeants, d'artisans et d'équipes entendent parler d'IA… sans vraiment savoir par où commencer ni ce qui pourrait être utile dans leur quotidien.
         </p>
         <p class="role">C'est là que j'interviens.</p>
-        <p class="intro">
+        <p>
           Mon rôle n'est pas de vous vendre une technologie compliquée, mais de vous aider à y voir plus clair : comprendre ce que l'IA peut réellement apporter à votre activité et identifier des usages simples, adaptés à votre métier.
         </p>
-        <p class="intro">
+        <p>
           Ensuite, nous avançons pas à pas pour mettre en place des solutions qui s'intègrent naturellement dans votre façon de travailler.
         </p>
-        <p class="signature">
-          <strong>Sans jargon.<br />Sans usine à gaz.</strong><br />
-          Juste des outils utiles et des exemples qui parlent à votre métier.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ——— FONDATEUR ——— -->
-  <section class="fondateur">
-    <div class="container">
-      <div class="fondateur-inner">
-        <img src="/ben-portrait.jpg" alt="Ben — Fondateur Dclick IA" class="fondateur-photo" />
-        <div class="fondateur-bio">
-          <span class="manifeste-tag">Le fondateur</span>
-          <h2 class="section-title">Bonjour, je suis <span class="text-accent">Benoit</span></h2>
-          <p class="intro">Consultant en IA & automatisation — Giennois.</p>
-          <p class="intro">Ancien électricien industriel en automatisme, aujourd'hui en production d'énergie, j'aide les TPE/PME à gagner du temps et en efficacité grâce à l'automatisation et à l'IA.</p>
-          <p class="signature">Mon engagement : <strong>un premier résultat concret en moins de 30 jours.</strong></p>
+        <div class="manifeste-signature">
+          <p><strong>Sans jargon. Sans usine à gaz.</strong><br />Juste des outils utiles et des exemples qui parlent à votre métier.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ——— PAIN POINTS ——— -->
-  <section>
+  <!-- ════════════════════════════════════════
+       FONDATEUR
+  ════════════════════════════════════════ -->
+  <section class="sec fondateur-wrap">
     <div class="container">
-      <h2 class="section-title">Vous avez des questions sur l'IA. <span class="text-accent">Nous apportons des réponses.</span></h2>
+      <div class="fondateur-grid">
+        <div class="fondateur-photo-wrap">
+          <img src="/Portrait Ben.png" alt="Benoit — Fondateur Dclick IA" class="fondateur-photo" />
+        </div>
+        <div class="fondateur-bio">
+          <span class="sec-tag">Le fondateur</span>
+          <h2>Bonjour, je suis <span style="color: var(--accent);">Benoit</span></h2>
+          <p>Consultant en IA &amp; automatisation — Giennois.</p>
+          <p>Ancien électricien industriel en automatisme, aujourd'hui en production d'énergie, j'aide les TPE/PME à gagner du temps et en efficacité grâce à l'automatisation et à l'IA.</p>
+          <p class="sig">Mon engagement : <strong>un premier résultat concret en moins de 30 jours.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PAIN POINTS
+  ════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-tag">Vos questions</span>
+        <h2 class="sec-title">Vous avez des doutes sur l'IA. <span class="accent">Voici les réponses.</span></h2>
+      </div>
       <div class="pain-grid">
         <div class="pain-card">
           <p class="pain-quote">"Je ne sais pas par où commencer"</p>
@@ -551,29 +993,37 @@
     </div>
   </section>
 
-  <!-- ——— 3 PROFILS ——— -->
-  <section>
+  <!-- ════════════════════════════════════════
+       PROFILS
+  ════════════════════════════════════════ -->
+  <section class="sec" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <h2 class="section-title">3 profils, <span class="text-accent">1 seul déclic</span></h2>
-      <p class="section-subtitle">Trouvez l'accompagnement adapté à votre structure.</p>
+      <div class="sec-header">
+        <span class="sec-tag">Pour qui</span>
+        <h2 class="sec-title">3 profils, <span class="accent">1 seul déclic</span></h2>
+        <p class="sec-sub">Trouvez l'accompagnement adapté à votre structure.</p>
+      </div>
       <div class="profils-grid">
         <div class="profil-card">
+          <span class="profil-num">01 / Petite structure</span>
           <h3>Petite structure</h3>
           <p class="profil-pain">"Je n'ai pas le temps, je ne sais pas par où commencer"</p>
           <p class="profil-reco">
-            → Ateliers pratiques&nbsp;(400€&nbsp;HT)<br />
+            → Ateliers pratiques&nbsp;(400€&nbsp;TTC)<br />
             → Diagnostic gratuit&nbsp;(30&nbsp;min)
           </p>
         </div>
         <div class="profil-card">
+          <span class="profil-num">02 / PME &amp; Services</span>
           <h3>PME &amp; Services</h3>
           <p class="profil-pain">"Mon équipe résiste, je ne sais pas quoi automatiser"</p>
           <p class="profil-reco">
-            → Diagnostic de rentabilité&nbsp;(1&nbsp;000€&nbsp;HT)<br />
+            → Diagnostic de rentabilité&nbsp;(1&nbsp;000€&nbsp;TTC)<br />
             → puis Ateliers pratiques
           </p>
         </div>
         <div class="profil-card">
+          <span class="profil-num">03 / Industrie &amp; Production</span>
           <h3>Industrie &amp; Production</h3>
           <p class="profil-pain">"Mes données terrain ne servent à rien"</p>
           <p class="profil-reco">
@@ -585,75 +1035,91 @@
     </div>
   </section>
 
-  <!-- ——— PARCOURS 3 ÉTAPES ——— -->
-  <section id="offres">
+  <!-- ════════════════════════════════════════
+       PARCOURS 3 ÉTAPES
+  ════════════════════════════════════════ -->
+  <section class="sec" id="offres" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <h2 class="section-title">Le parcours en <span class="text-accent">3 étapes</span></h2>
-      <p class="section-subtitle">De la prise en main à l'exploitation de vos données.</p>
+      <div class="sec-header">
+        <span class="sec-tag">Le parcours</span>
+        <h2 class="sec-title">De la prise en main à <span class="accent">vos données terrain</span></h2>
+        <p class="sec-sub">3 étapes progressives, adaptées à votre rythme.</p>
+      </div>
 
       <div class="parcours-grid">
 
-        <!-- ÉTAPE 01 — MAÎTRISER -->
-        <div class="parcours-card step-maitriser">
-          <span class="step-number">01</span>
-          <span class="step-badge">Maîtriser</span>
+        <!-- 01 — MAÎTRISER -->
+        <div class="pc blue">
+          <span class="pc-num">01</span>
+          <span class="pc-badge">Maîtriser</span>
           <h3>Ateliers pratiques</h3>
-          <p class="step-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
+          <p class="pc-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
           <ul>
             <li>Prise en main des assistants IA du quotidien</li>
             <li>Création de contenu assistée : texte, image, vidéo</li>
             <li>Bonnes pratiques et méthode de prompting</li>
             <li>Mini-charte IA interne pour encadrer les usages</li>
           </ul>
-          <p class="step-price">400€ HT</p>
-          <p class="step-format">½ journée ou 1 journée | Tous collaborateurs | Sur site ou à distance</p>
-          <p class="step-result">Adoption sereine · Usage cadré · Autonomie rapide</p>
-          <span class="rgpd-badge">✓ Conforme RGPD</span>
+          <div class="pc-footer">
+            <p class="pc-price">400€ TTC</p>
+            <p class="pc-format">½ journée ou 1 journée · Tous collaborateurs · Sur site ou à distance</p>
+            <p class="pc-result">Adoption sereine · Usage cadré · Autonomie rapide</p>
+            <span class="rgpd-badge">✓ Conforme RGPD</span>
+          </div>
         </div>
 
-        <!-- ÉTAPE 02 — OPTIMISER -->
-        <div class="parcours-card step-optimiser">
-          <span class="step-number">02</span>
-          <span class="step-badge">Optimiser</span>
+        <!-- 02 — OPTIMISER -->
+        <div class="pc green">
+          <span class="pc-num">02</span>
+          <span class="pc-badge">Optimiser</span>
           <h3>Diagnostic de rentabilité</h3>
-          <p class="step-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
+          <p class="pc-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
           <ul>
             <li>Diagnostic gratuit 30 min, sans engagement</li>
             <li>Audit complet des processus métier</li>
             <li>Cartographie des tâches répétitives et automatisables</li>
             <li>Recommandations priorisées + estimation ROI</li>
           </ul>
-          <p class="step-free">Flash : gratuit</p>
-          <p class="step-price">Audit complet : 1 000€ HT</p>
-          <p class="step-result">Actions prioritaires · Gains estimés · Démarrage rapide</p>
-          <span class="rgpd-badge">✓ Conforme RGPD</span>
+          <div class="pc-footer">
+            <p class="pc-free">Flash : gratuit</p>
+            <p class="pc-price">Audit complet : 1 000€ TTC</p>
+            <p class="pc-format">Demi-journée · Tous secteurs</p>
+            <p class="pc-result">Actions prioritaires · Gains estimés · Démarrage rapide</p>
+            <span class="rgpd-badge">✓ Conforme RGPD</span>
+          </div>
         </div>
 
-        <!-- ÉTAPE 03 — PILOTER (IoT) -->
-        <div class="parcours-card step-piloter">
-          <span class="step-number">03</span>
-          <span class="step-badge">Pour aller plus loin</span>
+        <!-- 03 — IoT -->
+        <div class="pc purple">
+          <span class="pc-num">03</span>
+          <span class="pc-badge">Pour aller plus loin</span>
           <h3>IoT &amp; données terrain</h3>
-          <p class="step-desc">Captez, comprenez et anticipez grâce à vos données terrain.</p>
+          <p class="pc-desc">Captez, comprenez et anticipez grâce à vos données terrain.</p>
           <ul>
             <li>Diagnostic data et étude de faisabilité</li>
             <li>Capteurs connectés sur site</li>
             <li>Plan d'exploitation et de visualisation des données</li>
           </ul>
-          <p class="step-result">Décisions pilotées par la donnée terrain</p>
-          <span class="rgpd-badge">✓ Conforme RGPD</span>
+          <div class="pc-footer">
+            <p class="pc-result">Décisions pilotées par la donnée terrain</p>
+            <span class="rgpd-badge">✓ Conforme RGPD</span>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ——— CAS D'USAGE ——— -->
-  <section id="cas-usage">
+  <!-- ════════════════════════════════════════
+       CAS D'USAGE
+  ════════════════════════════════════════ -->
+  <section class="sec" id="cas-usage" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <h2 class="section-title">3 cas d'usage concrets — <span class="text-accent">artisans &amp; services</span></h2>
-      <p class="section-subtitle">Découvrez comment l'IA s'applique à votre quotidien.</p>
-
+      <div class="sec-header">
+        <span class="sec-tag">Cas d'usage concrets</span>
+        <h2 class="sec-title">L'IA dans votre <span class="accent">quotidien métier</span></h2>
+        <p class="sec-sub">3 exemples réels — artisans, services, direction PME.</p>
+      </div>
       <div class="cas-grid">
         <div class="cas-card">
           <h4>Artisan / TPE — Devis à la voix</h4>
@@ -704,11 +1170,16 @@
     </div>
   </section>
 
-  <!-- ——— FAQ ——— -->
-  <section>
+  <!-- ════════════════════════════════════════
+       FAQ
+  ════════════════════════════════════════ -->
+  <section class="sec" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <h2 class="section-title">Questions <span class="text-accent">fréquentes</span></h2>
-      <p class="section-subtitle">Les vrais doutes, les vraies réponses.</p>
+      <div class="sec-header">
+        <span class="sec-tag">FAQ</span>
+        <h2 class="sec-title">Questions <span class="accent">fréquentes</span></h2>
+        <p class="sec-sub">Les vrais doutes, les vraies réponses.</p>
+      </div>
       <div class="faq-grid">
         <div class="faq-item">
           <h3>"Est-ce que c'est vraiment accessible pour mon activité&nbsp;?"</h3>
@@ -724,53 +1195,59 @@
         </div>
         <div class="faq-item">
           <h3>"Et si ça ne convient pas à mon équipe ?"</h3>
-          <p>Le diagnostic gratuit est gratuit et sans engagement. Si l'IA ne vous apporte pas de valeur concrète, je ne vous propose rien. Simple.</p>
+          <p>Le diagnostic gratuit est sans engagement. Si l'IA ne vous apporte pas de valeur concrète, je ne vous propose rien. Simple.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ——— CTA FINAL ——— -->
-  <section class="cta-section" id="contact">
+  <!-- ════════════════════════════════════════
+       CTA FINAL
+  ════════════════════════════════════════ -->
+  <section class="cta-sec" id="contact">
     <div class="container">
       <div class="cta-box">
-        <h2 class="section-title">Prêt à faire le <span class="text-accent">premier pas</span> ?</h2>
-        <p>Commençons par un diagnostic gratuit de 30 min pour identifier vos 3 premiers gains IA.</p>
+        <h2>Prêt à faire le <span class="accent">premier pas</span>&nbsp;?</h2>
+        <p>Commençons par un diagnostic gratuit de 30 min pour identifier vos 3 premiers gains IA — sans engagement.</p>
         <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
-        <div class="cta-meta">
-          <span>Sans engagement</span>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--clr-text-muted);">
-          Giennois — Centre-Val de Loire
-        </p>
+        <p class="cta-meta">Sans engagement · Giennois — Centre-Val de Loire</p>
       </div>
     </div>
   </section>
 
-  <!-- ——— TALLY : DIAGNOSTIC GRATUIT ——— -->
-  <section id="diagnostic" style="border-top: 1px solid var(--clr-border);">
-    <div class="container" style="max-width: 760px;">
-      <h2 class="section-title">Diagnostic gratuit <span class="text-accent">30 min</span></h2>
-      <iframe
-        width="100%"
-        height="500"
-        src="https://ccf7bc72.sibforms.com/serve/MUIFAN6KRXnpZaMjqZJ2Vff8ywM5ZUVxRJ9VA03AAjUht4aqes-_gA1qv7e6UpWxcGKumHEPLWkhhGqaQHBz2TDN414fF-Y5TiV0oKTwrFue2jZJ38tC9ufyvLkOp70xi0K6tAoixZoIWDbhmdu9h60KltFb5qO0xTsJ5uPErQjPMsIUuPClROIuT-PjMkHarSXa3IlOJy4xEgZ-lg=="
-        frameborder="0"
-        scrolling="auto"
-        allowfullscreen
-        style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;"
-        title="Diagnostic gratuit 30 min"
-      ></iframe>
+  <!-- ════════════════════════════════════════
+       FORMULAIRE DIAGNOSTIC
+  ════════════════════════════════════════ -->
+  <section class="form-sec" id="diagnostic">
+    <div class="container">
+      <div class="form-inner">
+        <div class="sec-header">
+          <span class="sec-tag">Démarrer</span>
+          <h2 class="sec-title">Diagnostic gratuit <span class="accent">30 min</span></h2>
+        </div>
+        <iframe
+          width="100%"
+          height="500"
+          src="https://ccf7bc72.sibforms.com/serve/MUIFAN6KRXnpZaMjqZJ2Vff8ywM5ZUVxRJ9VA03AAjUht4aqes-_gA1qv7e6UpWxcGKumHEPLWkhhGqaQHBz2TDN414fF-Y5TiV0oKTwrFue2jZJ38tC9ufyvLkOp70xi0K6tAoixZoIWDbhmdu9h60KltFb5qO0xTsJ5uPErQjPMsIUuPClROIuT-PjMkHarSXa3IlOJy4xEgZ-lg=="
+          frameborder="0"
+          scrolling="auto"
+          allowfullscreen
+          style="display: block; margin: 0 auto; max-width: 100%; border-radius: 12px;"
+          title="Diagnostic gratuit 30 min"
+        ></iframe>
+      </div>
     </div>
   </section>
 
-  <!-- ——— FOOTER ——— -->
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
   <footer>
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <span style="font-weight: 700; color: var(--clr-text); font-size: 1rem;">Dclick <span style="color: var(--clr-accent);">IA</span></span>
-          <span>Automatisation simple. Résultats concrets.</span>
+          Dclick<span class="ia">IA</span>
+          <span style="font-family: var(--font); font-weight: 400; color: var(--muted); font-size: 0.82rem; margin-left: 0.75rem; letter-spacing: 0;">Automatisation simple. Résultats concrets.</span>
         </div>
         <div class="footer-links">
           <a href="/mentions-legales">Mentions légales</a>
@@ -783,9 +1260,8 @@
     </div>
   </footer>
 
-
-  <!-- CTA STICKY MOBILE -->
-  <div class="sticky-mobile-cta">
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-mob">
     <a href="#diagnostic">Diagnostic gratuit 30 min →</a>
   </div>
 
