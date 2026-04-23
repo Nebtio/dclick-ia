@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="/LogoDclickV2.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -103,7 +103,7 @@
       gap: 1rem;
     }
     .nav-brand {
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font);
       font-size: 1.15rem;
       font-weight: 800;
       color: var(--text);
@@ -245,9 +245,16 @@
 
     .hero-actions {
       display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
       margin-bottom: 3.5rem;
+    }
+    .hero-guarantee {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0;
+      letter-spacing: 0.01em;
     }
 
     .btn-primary {
@@ -529,6 +536,10 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 1rem;
+      overflow: visible;
+    }
+    .pc:hover .dclick-mascot {
+      transform: translateY(-6px) scale(1.04);
     }
     .pc {
       background: var(--surface);
@@ -772,7 +783,7 @@
       gap: 1rem;
     }
     .footer-brand {
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font);
       font-weight: 800;
       color: var(--text);
       font-size: 1.05rem;
@@ -879,7 +890,7 @@
 
         <div class="hero-badge au d1">
           <span class="hero-badge-dot"></span>
-          Giennois &amp; Centre-Val de Loire
+          Pour TPE, artisans &amp; PME · Gien (45)
         </div>
 
         <h1 class="au d2">
@@ -889,14 +900,14 @@
         </h1>
 
         <p class="hero-sub au d3">
-          Dclick IA automatise vos devis, relances et saisies administratives.
+          Devis, relances, saisies administratives — automatisés par l'IA.
           Sans projet complexe, sans formation lourde.
-          Résultats en moins de 30 jours.
+          Premiers résultats en moins de 30 jours.
         </p>
 
         <div class="hero-actions au d4">
           <a href="#diagnostic" class="btn-primary">Demander mon diagnostic gratuit →</a>
-          <a href="#offres" class="btn-ghost">Voir les offres</a>
+          <p class="hero-guarantee">Sans engagement · Si l'IA ne vous apporte pas de valeur concrète, je ne vous propose rien.</p>
         </div>
 
         <div class="hero-metrics au d5">
@@ -954,7 +965,7 @@
     <div class="container">
       <div class="fondateur-grid">
         <div class="fondateur-photo-wrap">
-          <img src="/Portrait Ben.png" alt="Benoit — Fondateur Dclick IA" class="fondateur-photo" />
+          <img src="/Portrait Ben.png" alt="Benoit — Fondateur Dclick IA" class="fondateur-photo" loading="lazy" decoding="async" />
         </div>
         <div class="fondateur-bio">
           <span class="sec-tag">Le fondateur</span>
@@ -1049,60 +1060,75 @@
       <div class="parcours-grid">
 
         <!-- 01 — MAÎTRISER -->
-        <div class="pc blue">
-          <span class="pc-num">01</span>
-          <span class="pc-badge">Maîtriser</span>
-          <h3>Ateliers pratiques</h3>
-          <p class="pc-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
-          <ul>
-            <li>Prise en main des assistants IA du quotidien</li>
-            <li>Création de contenu assistée : texte, image, vidéo</li>
-            <li>Bonnes pratiques et méthode de prompting</li>
-            <li>Mini-charte IA interne pour encadrer les usages</li>
-          </ul>
-          <div class="pc-footer">
-            <p class="pc-price">400€ TTC</p>
-            <p class="pc-format">½ journée ou 1 journée · Tous collaborateurs · Sur site ou à distance</p>
-            <p class="pc-result">Adoption sereine · Usage cadré · Autonomie rapide</p>
-            <span class="rgpd-badge">✓ Conforme RGPD</span>
+        <div class="pc blue" style="
+          background-image: url('/dclick-ateliers.jpg');
+          background-size: 76%;
+          background-position: right bottom;
+          background-repeat: no-repeat;
+          position: relative;
+        ">
+          <div style="position:absolute;inset:0;background:linear-gradient(120deg,var(--surface) 28%,rgba(16,16,16,0.08) 100%);border-radius:20px;pointer-events:none;z-index:0;"></div>
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;flex:1;">
+            <span class="pc-num">01</span>
+            <span class="pc-badge">Maîtriser</span>
+            <h3>Ateliers pratiques</h3>
+            <p class="pc-desc">Rendre vos équipes autonomes sur les outils IA du quotidien et de création de contenu.</p>
+            <ul>
+              <li>Prise en main des assistants IA du quotidien</li>
+              <li>Création de contenu assistée : texte, image, vidéo</li>
+              <li>Bonnes pratiques et méthode de prompting</li>
+              <li>Mini-charte IA interne pour encadrer les usages</li>
+            </ul>
+            <div class="pc-footer" style="margin-top:auto;">
+              <p class="pc-price">400€ TTC</p>
+              <p class="pc-format">½ journée ou 1 journée · Tous collaborateurs · Sur site ou à distance</p>
+              <p class="pc-result">Adoption sereine · Usage cadré · Autonomie rapide</p>
+              <span class="rgpd-badge">✓ Conforme RGPD</span>
+            </div>
           </div>
         </div>
 
         <!-- 02 — OPTIMISER -->
-        <div class="pc green">
-          <span class="pc-num">02</span>
-          <span class="pc-badge">Optimiser</span>
-          <h3>Diagnostic de rentabilité</h3>
-          <p class="pc-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
-          <ul>
-            <li>Diagnostic gratuit 30 min, sans engagement</li>
-            <li>Audit complet des processus métier</li>
-            <li>Cartographie des tâches répétitives et automatisables</li>
-            <li>Recommandations priorisées + estimation ROI</li>
-          </ul>
-          <div class="pc-footer">
-            <p class="pc-free">Flash : gratuit</p>
-            <p class="pc-price">Audit complet : 1 000€ TTC</p>
-            <p class="pc-format">Demi-journée · Tous secteurs</p>
-            <p class="pc-result">Actions prioritaires · Gains estimés · Démarrage rapide</p>
-            <span class="rgpd-badge">✓ Conforme RGPD</span>
+        <div class="pc green" style="background-image:url('/dclick-audit.jpg');background-size:75%;background-position:right bottom;background-repeat:no-repeat;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(120deg,var(--surface) 28%,rgba(16,16,16,0.08) 100%);border-radius:20px;pointer-events:none;z-index:0;"></div>
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;flex:1;">
+            <span class="pc-num">02</span>
+            <span class="pc-badge">Optimiser</span>
+            <h3>Diagnostic de rentabilité</h3>
+            <p class="pc-desc">Identifier vos gains rapides et construire votre feuille de route IA.</p>
+            <ul>
+              <li>Diagnostic gratuit 30 min, sans engagement</li>
+              <li>Audit complet des processus métier</li>
+              <li>Cartographie des tâches répétitives et automatisables</li>
+              <li>Recommandations priorisées + estimation ROI</li>
+            </ul>
+            <div class="pc-footer" style="margin-top:auto;">
+              <p class="pc-free">Flash : gratuit</p>
+              <p class="pc-price">Audit complet : 1 000€ TTC</p>
+              <p class="pc-format">Demi-journée · Tous secteurs</p>
+              <p class="pc-result">Actions prioritaires · Gains estimés · Démarrage rapide</p>
+              <span class="rgpd-badge">✓ Conforme RGPD</span>
+            </div>
           </div>
         </div>
 
         <!-- 03 — IoT -->
-        <div class="pc purple">
-          <span class="pc-num">03</span>
-          <span class="pc-badge">Pour aller plus loin</span>
-          <h3>IoT &amp; données terrain</h3>
-          <p class="pc-desc">Captez, comprenez et anticipez grâce à vos données terrain.</p>
-          <ul>
-            <li>Diagnostic data et étude de faisabilité</li>
-            <li>Capteurs connectés sur site</li>
-            <li>Plan d'exploitation et de visualisation des données</li>
-          </ul>
-          <div class="pc-footer">
-            <p class="pc-result">Décisions pilotées par la donnée terrain</p>
-            <span class="rgpd-badge">✓ Conforme RGPD</span>
+        <div class="pc purple" style="background-image:url('/dclick-iot.jpg');background-size:70%;background-position:right bottom;background-repeat:no-repeat;position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(120deg,var(--surface) 28%,rgba(16,16,16,0.08) 100%);border-radius:20px;pointer-events:none;z-index:0;"></div>
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;flex:1;">
+            <span class="pc-num">03</span>
+            <span class="pc-badge">Pour aller plus loin</span>
+            <h3>IoT &amp; données terrain</h3>
+            <p class="pc-desc">Captez, comprenez et anticipez grâce à vos données terrain.</p>
+            <ul>
+              <li>Diagnostic data et étude de faisabilité</li>
+              <li>Capteurs connectés sur site</li>
+              <li>Plan d'exploitation et de visualisation des données</li>
+            </ul>
+            <div class="pc-footer" style="margin-top:auto;">
+              <p class="pc-result">Décisions pilotées par la donnée terrain</p>
+              <span class="rgpd-badge">✓ Conforme RGPD</span>
+            </div>
           </div>
         </div>
 
@@ -1227,7 +1253,7 @@
         </div>
         <iframe
           width="100%"
-          height="500"
+          height="700"
           src="https://ccf7bc72.sibforms.com/serve/MUIFAN6KRXnpZaMjqZJ2Vff8ywM5ZUVxRJ9VA03AAjUht4aqes-_gA1qv7e6UpWxcGKumHEPLWkhhGqaQHBz2TDN414fF-Y5TiV0oKTwrFue2jZJ38tC9ufyvLkOp70xi0K6tAoixZoIWDbhmdu9h60KltFb5qO0xTsJ5uPErQjPMsIUuPClROIuT-PjMkHarSXa3IlOJy4xEgZ-lg=="
           frameborder="0"
           scrolling="auto"
